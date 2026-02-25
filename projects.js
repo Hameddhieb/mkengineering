@@ -440,6 +440,7 @@ const resultsCount = document.querySelector('#results-count');
 const statsGrid = document.querySelector('#stats-grid');
 const languageSelect = document.querySelector('#projects-language');
 const metaDescription = document.querySelector('meta[name="description"]');
+const themeToggle = document.querySelector('#theme-toggle-projects');
 
 const translations = {
   ar: {
@@ -451,6 +452,8 @@ const translations = {
     nav_services: 'الخدمات',
     nav_contact: 'التواصل',
     lang_label: 'اللغة',
+    theme_dark: 'داكن',
+    theme_light: 'فاتح',
     sponsor_aria: 'مرجع الشعارات',
     sponsor_alt: 'شعار شريك',
     hero_eyebrow: 'مراجع المشاريع',
@@ -483,6 +486,8 @@ const translations = {
     nav_services: 'Services',
     nav_contact: 'Contact',
     lang_label: 'Langue',
+    theme_dark: 'Sombre',
+    theme_light: 'Clair',
     sponsor_aria: 'References partenaires',
     sponsor_alt: 'Logo partenaire',
     hero_eyebrow: 'REFERENCES PROJETS',
@@ -515,6 +520,8 @@ const translations = {
     nav_services: 'Services',
     nav_contact: 'Contact',
     lang_label: 'Language',
+    theme_dark: 'Dark',
+    theme_light: 'Light',
     sponsor_aria: 'Sponsorship references',
     sponsor_alt: 'Sponsorship project',
     hero_eyebrow: 'PROJECT REFERENCES',
@@ -553,9 +560,23 @@ const countryNames = {
 
 let currentLang = localStorage.getItem('mk_projects_lang') || 'en';
 if (!translations[currentLang]) currentLang = 'en';
+let currentTheme = localStorage.getItem('mk_theme') === 'dark' ? 'dark' : 'light';
 
 const t = (key) => translations[currentLang][key] || translations.en[key] || key;
 const countryLabel = (country) => countryNames[country]?.[currentLang] || country;
+
+const updateThemeButtonLabel = () => {
+  if (!themeToggle) return;
+  const key = currentTheme === 'dark' ? 'theme_light' : 'theme_dark';
+  themeToggle.textContent = t(key);
+};
+
+const applyTheme = (theme, persist = true) => {
+  currentTheme = theme === 'dark' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  updateThemeButtonLabel();
+  if (persist) localStorage.setItem('mk_theme', currentTheme);
+};
 
 const countByCountry = () => {
   const map = new Map();
@@ -623,10 +644,17 @@ const filterProjects = () => {
 const renderTable = () => {
   const rows = filterProjects();
   resultsCount.textContent = String(rows.length);
+  const labels = {
+    number: '#',
+    owner: t('th_owner'),
+    country: t('th_country'),
+    project: t('th_project'),
+    note: t('th_note')
+  };
 
   if (!rows.length) {
     tbody.innerHTML = `
-      <tr>
+      <tr class="no-data-row">
         <td colspan="5" class="result-note">${t('no_results')}</td>
       </tr>
     `;
@@ -637,11 +665,11 @@ const renderTable = () => {
     .map(
       (project, index) => `
       <tr>
-        <td>${index + 1}</td>
-        <td>${project.owner}</td>
-        <td>${countryLabel(project.country)}</td>
-        <td>${project.project}</td>
-        <td>${project.note || '-'}</td>
+        <td data-label="${labels.number}">${index + 1}</td>
+        <td data-label="${labels.owner}">${project.owner}</td>
+        <td data-label="${labels.country}">${countryLabel(project.country)}</td>
+        <td data-label="${labels.project}">${project.project}</td>
+        <td data-label="${labels.note}">${project.note || '-'}</td>
       </tr>
     `
     )
@@ -680,6 +708,7 @@ const applyLanguage = (lang) => {
   });
 
   if (languageSelect) languageSelect.value = lang;
+  updateThemeButtonLabel();
 
   updateCountryFilterLabels();
   renderStats();
@@ -692,6 +721,12 @@ searchInput.addEventListener('input', renderTable);
 if (languageSelect) {
   languageSelect.addEventListener('change', () => applyLanguage(languageSelect.value));
 }
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  });
+}
 
 buildCountryFilter();
+applyTheme(currentTheme, false);
 applyLanguage(currentLang);

@@ -4,6 +4,7 @@ const navToggle = document.querySelector('.nav-toggle');
 const navList = document.querySelector('.nav-list');
 const langSelect = document.querySelector('#language-select');
 const pageLoader = document.querySelector('.page-loader');
+const themeToggle = document.querySelector('#theme-toggle');
 
 const translations = {
   ar: {
@@ -15,6 +16,8 @@ const translations = {
     nav_team: 'فريقنا',
     nav_projects: 'مشاريعنا',
     nav_contact: 'التواصل',
+    theme_dark: 'داكن',
+    theme_light: 'فاتح',
     cta_contact: 'اتصل بنا',
     eyebrow_hero: 'مكتب استشارات هندسية',
     eyebrow_services: 'الخدمات',
@@ -90,6 +93,8 @@ const translations = {
     nav_team: 'Equipe',
     nav_projects: 'Nos Projets',
     nav_contact: 'Contact',
+    theme_dark: 'Sombre',
+    theme_light: 'Clair',
     cta_contact: 'Nous Contacter',
     eyebrow_hero: 'Bureau de conseil en ingenierie',
     eyebrow_services: 'Services',
@@ -165,6 +170,8 @@ const translations = {
     nav_team: 'Team',
     nav_projects: 'Our Projects',
     nav_contact: 'Contact',
+    theme_dark: 'Dark',
+    theme_light: 'Light',
     cta_contact: 'Contact Us',
     eyebrow_hero: 'Engineering Consultancy Office',
     eyebrow_services: 'Services',
@@ -233,6 +240,20 @@ const translations = {
 };
 
 let currentLang = 'ar';
+let currentTheme = localStorage.getItem('mk_theme') === 'dark' ? 'dark' : 'light';
+
+const updateThemeButtonLabel = () => {
+  if (!themeToggle) return;
+  const key = currentTheme === 'dark' ? 'theme_light' : 'theme_dark';
+  themeToggle.textContent = translations[currentLang][key] || translations.en[key];
+};
+
+const applyTheme = (theme, persist = true) => {
+  currentTheme = theme === 'dark' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  updateThemeButtonLabel();
+  if (persist) localStorage.setItem('mk_theme', currentTheme);
+};
 
 if (pageLoader) {
   window.setTimeout(() => {
@@ -273,6 +294,9 @@ const applyLanguage = (lang) => {
   if (langSelect) {
     langSelect.value = lang;
   }
+
+  updateThemeButtonLabel();
+  localStorage.setItem('mk_lang', lang);
 };
 
 window.addEventListener('scroll', updateHeaderState, { passive: true });
@@ -295,6 +319,12 @@ if (navToggle && navList) {
 
 if (langSelect) {
   langSelect.addEventListener('change', () => applyLanguage(langSelect.value));
+}
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  });
 }
 
 const revealItems = document.querySelectorAll('.reveal');
@@ -409,4 +439,5 @@ if (form) {
   });
 }
 
-applyLanguage('ar');
+applyTheme(currentTheme, false);
+applyLanguage(localStorage.getItem('mk_lang') || 'ar');
