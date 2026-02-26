@@ -15,27 +15,46 @@
 <body>
   <a class="skip-link" href="#projects-main" data-i18n="skip_link">Skip to content</a>
 
-  <header class="site-header">
+  <header class="site-header" id="top">
     <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <img src="logo.png" alt="MK Engineering Logo" width="70" height="70" decoding="async" />
-        <span>MK ENGINEERING</span>
+      <a class="brand-block" href="index.html">
+        <img class="brand-logo" src="logo.png" alt="MK Engineering Logo" width="70" height="70" decoding="async" />
+        <div>
+          <p class="brand-name" lang="en">MK ENGINEERING</p>
+          <p class="brand-tagline" data-i18n="brand_tagline">Certified Engineering Solutions</p>
+        </div>
       </a>
-      <nav class="header-nav" aria-label="Primary navigation" data-i18n-aria-label="nav_aria">
-        <a href="index.html" data-i18n="nav_home">Home</a>
-        <a href="index.html#services" data-i18n="nav_services">Services</a>
-        <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+
+      <nav class="main-nav" aria-label="Primary navigation" data-i18n-aria-label="nav_aria">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-list">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="sr-only" data-i18n="nav_toggle">Open and close menu</span>
+        </button>
+        <ul id="nav-list" class="nav-list">
+          <li><a href="index.html#services" data-i18n="nav_services">Services</a></li>
+          <li><a href="index.html#about" data-i18n="nav_about">About</a></li>
+          <li><a href="index.html#team" data-i18n="nav_team">Team</a></li>
+          <li><a href="our-projets.html" data-i18n="nav_projects">Our Projects</a></li>
+          <li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
+        </ul>
       </nav>
+      <div class="nav-overlay" id="nav-overlay" hidden></div>
+
       <div class="header-tools">
         <button id="theme-toggle-projects" class="theme-toggle" type="button">
           Dark
         </button>
-        <label class="sr-only" for="projects-language" data-i18n="lang_label">Language</label>
-        <select id="projects-language" class="lang-select" aria-label="Language selector">
-          <option value="ar">AR</option>
-          <option value="fr">FR</option>
-          <option value="en">EN</option>
-        </select>
+        <div class="lang-switcher">
+          <label class="sr-only" for="projects-language" data-i18n="lang_label">Language</label>
+          <select id="projects-language" class="lang-select" aria-label="Language selector">
+            <option value="ar">AR</option>
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+          </select>
+        </div>
+        <a class="btn btn-primary header-cta" href="index.html#contact" data-i18n="cta_contact">Contact Us</a>
       </div>
     </div>
   </header>

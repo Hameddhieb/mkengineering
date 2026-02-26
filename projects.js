@@ -441,16 +441,26 @@ const statsGrid = document.querySelector('#stats-grid');
 const languageSelect = document.querySelector('#projects-language');
 const metaDescription = document.querySelector('meta[name="description"]');
 const themeToggle = document.querySelector('#theme-toggle-projects');
+const navToggle = document.querySelector('.nav-toggle');
+const navList = document.querySelector('.nav-list');
+const navOverlay = document.querySelector('#nav-overlay');
+const mainNav = document.querySelector('.main-nav');
 
 const translations = {
   ar: {
     page_title: 'MK ENGINEERING | مشاريعنا',
     page_description: 'MK Engineering - مشاريعنا: مراجع هندسية دولية عبر الصناعة والصحة والطاقة والبنية التحتية.',
     skip_link: 'تجاوز إلى المحتوى',
+    brand_tagline: 'حلول هندسية معتمدة',
+    nav_toggle: 'فتح وإغلاق القائمة',
     nav_aria: 'التنقل الرئيسي',
     nav_home: 'الرئيسية',
     nav_services: 'الخدمات',
+    nav_about: 'من نحن',
+    nav_team: 'فريقنا',
+    nav_projects: 'مشاريعنا',
     nav_contact: 'التواصل',
+    cta_contact: 'تواصل معنا',
     lang_label: 'اللغة',
     theme_dark: 'داكن',
     theme_light: 'فاتح',
@@ -481,10 +491,16 @@ const translations = {
     page_title: "MK ENGINEERING | Nos projets",
     page_description: "MK Engineering - Nos projets: références d'ingénierie internationales dans l'industrie, la santé, l'énergie et l'infrastructure.",
     skip_link: "Aller au contenu",
+    brand_tagline: "Solutions d'ingénierie certifiées",
+    nav_toggle: "Ouvrir/fermer le menu",
     nav_aria: "Navigation principale",
     nav_home: "Accueil",
     nav_services: "Services",
+    nav_about: "À propos",
+    nav_team: "Équipe",
+    nav_projects: "Nos projets",
     nav_contact: "Contact",
+    cta_contact: "Nous contacter",
     lang_label: "Langue",
     theme_dark: "Sombre",
     theme_light: "Clair",
@@ -515,10 +531,16 @@ const translations = {
     page_title: 'MK ENGINEERING | Our Projects',
     page_description: 'MK Engineering - Our Projects: International engineering references across industry, healthcare, energy, and infrastructure.',
     skip_link: 'Skip to content',
+    brand_tagline: 'Certified Engineering Solutions',
+    nav_toggle: 'Open and close menu',
     nav_aria: 'Primary navigation',
     nav_home: 'Home',
     nav_services: 'Services',
+    nav_about: 'About',
+    nav_team: 'Team',
+    nav_projects: 'Our Projects',
     nav_contact: 'Contact',
+    cta_contact: 'Contact Us',
     lang_label: 'Language',
     theme_dark: 'Dark',
     theme_light: 'Light',
@@ -703,6 +725,10 @@ const applyLanguage = (lang) => {
     element.setAttribute('aria-label', t(key));
   });
 
+  if (mainNav && translations[currentLang].nav_aria) {
+    mainNav.setAttribute('aria-label', t('nav_aria'));
+  }
+
   document.querySelectorAll('.sponsor-track:first-child img').forEach((image, index) => {
     image.alt = `${t('sponsor_alt')} ${index + 1}`;
   });
@@ -724,6 +750,41 @@ if (languageSelect) {
 if (themeToggle) {
   themeToggle.addEventListener('click', () => {
     applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  });
+}
+
+if (navToggle && navList) {
+  const setNavOpen = (open) => {
+    navToggle.setAttribute('aria-expanded', String(open));
+    navList.classList.toggle('open', open);
+    if (navOverlay) {
+      navOverlay.hidden = !open;
+      navOverlay.classList.toggle('open', open);
+    }
+    document.body.classList.toggle('nav-open', open);
+  };
+
+  navToggle.addEventListener('click', () => {
+    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+    setNavOpen(!isExpanded);
+  });
+
+  navList.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      setNavOpen(false);
+    });
+  });
+
+  if (navOverlay) {
+    navOverlay.addEventListener('click', () => setNavOpen(false));
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setNavOpen(false);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 980) setNavOpen(false);
   });
 }
 
