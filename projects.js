@@ -512,8 +512,8 @@ const translations = {
     back_main: 'Retour au site principal'
   },
   en: {
-    page_title: 'MK ENGINEERING | Our Projets',
-    page_description: 'MK Engineering - Our Projets: International engineering references across industry, healthcare, energy, and infrastructure.',
+    page_title: 'MK ENGINEERING | Our Projects',
+    page_description: 'MK Engineering - Our Projects: International engineering references across industry, healthcare, energy, and infrastructure.',
     skip_link: 'Skip to content',
     nav_aria: 'Primary navigation',
     nav_home: 'Home',
@@ -525,7 +525,7 @@ const translations = {
     sponsor_aria: 'Sponsorship references',
     sponsor_alt: 'Sponsorship project',
     hero_eyebrow: 'PROJECT REFERENCES',
-    hero_title: 'Our Projets',
+    hero_title: 'Our Projects',
     hero_text: 'Detailed portfolio of MK Engineering references across Tunisia, Libya, Algeria, Mauritania, Oman, Ivory Coast, Burkina Faso, and UAE.',
     stats_aria: 'Project statistics',
     label_country: 'Country',

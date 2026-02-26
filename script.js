@@ -2,6 +2,8 @@
 const header = document.querySelector('.site-header');
 const navToggle = document.querySelector('.nav-toggle');
 const navList = document.querySelector('.nav-list');
+const navOverlay = document.querySelector('#nav-overlay');
+const mainNav = document.querySelector('.main-nav');
 const langSelect = document.querySelector('#language-select');
 const pageLoader = document.querySelector('.page-loader');
 const themeToggle = document.querySelector('#theme-toggle');
@@ -11,16 +13,28 @@ const translations = {
     skip_link: 'تجاوز إلى المحتوى',
     brand_tagline: 'حلول هندسية معتمدة',
     nav_toggle: 'فتح وإغلاق القائمة',
-    nav_services: 'الخدمات',
-    nav_about: 'من نحن',
-    nav_team: 'فريقنا',
+    nav_aria: 'التنقل الرئيسي',
+    nav_services: 'مجالات التدخل',
+    nav_about: 'التعريف',
+    nav_team: 'المسار المهني',
     nav_projects: 'مشاريعنا',
     nav_contact: 'التواصل',
     theme_dark: 'داكن',
     theme_light: 'فاتح',
-    cta_contact: 'اتصل بنا',
+    cta_contact: 'تواصل معنا',
+    hero_badge: 'MK ENGINEERING',
+    hero_main_title: 'مكتب دراسات متعدد الاختصاصات',
+    hero_main_text: 'MK ENGINEERING مكتب هندسي متعدد الاختصاصات متخصص في الكهرباء والسلامة من الحرائق والأنظمة الفوطاضوئية والتدقيق الطاقي والتصرف في الطاقة عبر كل مراحل المشروع.',
+    hero_main_btn_primary: 'مشاريعنا',
+    hero_main_btn_secondary: 'استكشف مجالاتنا',
+    cert_title: 'خبرات معتمدة',
+    cert_1: 'مهندس استشاري في الكهرباء (معتمد من MEHAT)',
+    cert_2: 'مهندس استشاري في السلامة من الحرائق (معتمد من ONPC)',
+    cert_3: 'خبير تدقيق طاقي (معتمد من ANME)',
+    cert_4: 'خبير في الفوطاضوئية (معتمد من ANME)',
+    cert_5: 'خبير نظم التصرف في الطاقة (معتمد من GIZ)',
     eyebrow_hero: 'مكتب استشارات هندسية',
-    eyebrow_services: 'الخدمات',
+    eyebrow_services: 'مجالات التدخل',
     eyebrow_about: 'عن MK ENGINEERING',
     eyebrow_team: 'الفريق',
     eyebrow_contact: 'التواصل',
@@ -29,35 +43,39 @@ const translations = {
     hero_btn_primary: 'احجز استشارة',
     hero_btn_secondary: 'استعرض الخدمات',
     hero_panel_title: 'مجالات الاعتماد',
-    services_title: 'خدمات هندسية متخصصة',
-    service_1_title: 'الكهرباء',
-    service_1_text: 'تصميم ومتابعة أنظمة الكهرباء للمباني الصناعية والتجارية والسكنية وفق المعايير الفنية المعتمدة.',
-    service_2_title: 'الحماية من الحرائق',
-    service_2_text: 'إعداد دراسات الحماية والإنذار والإخلاء وإصدار التوصيات الفنية لضمان السلامة والامتثال.',
-    service_3_title: 'التدقيق ونظم التصرف في الطاقة',
-    service_3_text: 'تشخيص استهلاك الطاقة، إعداد خطط التحسين، ومرافقة المؤسسات لتطبيق أنظمة إدارة طاقية فعّالة.',
-    service_4_title: 'الفوطاضوئية',
-    service_4_text: 'دراسات وتركيب حلول الطاقة الشمسية الفوطاضوئية مع حسابات مردودية دقيقة وإشراف تنفيذي مهني.',
-    about_title: 'خبرة معتمدة وإشراف تقني دقيق',
-    about_text_1: 'نعتمد منهجية هندسية واضحة تبدأ بتحليل المشروع وتحديد المتطلبات الفنية بدقة، ثم إعداد الدراسات التنفيذية ومتابعة التطبيق الميداني بما يضمن التوافق مع القوانين الفنية ومعايير الجودة والسلامة.',
-    about_text_2: 'فريق المكتب يركز على الحلول القابلة للتنفيذ، إدارة المخاطر التقنية، وتحقيق التوازن بين الكفاءة الطاقية والاستدامة والتكلفة التشغيلية.',
-    team_title: 'فريق هندسي متعدد الاختصاصات',
-    team_member_1_name:'محمد قصمتيني',
-    team_member_1_role: 'رئيس تنفيذي',
-    team_member_1_text: 'قيادة دراسات المشاريع والإشراف على التنسيق التقني وضمان مطابقة الحلول للمواصفات.',
-    team_member_2_name: 'فريق الدراسات الكهربائية',
-    team_member_2_role: 'قسم الهندسة الكهربائية',
-    team_member_2_text: 'إعداد المخططات التنفيذية والحسابات الفنية لأنظمة القدرة والتحكم والحماية.',
-    team_member_3_name: 'فريق الطاقات المتجددة',
-    team_member_3_role: 'قسم الفوطاضوئية والطاقة',
-    team_member_3_text: 'تحليل الأداء الطاقي وتطوير حلول فوطاضوئية فعالة مع متابعة التنفيذ والاختبارات.',
-    contact_title: 'تواصل مباشر مع المكتب',
-    contact_info_title: 'بيانات التواصل',
+    services_title: 'النطاق التقني الذي يقدمه MK Engineering',
+    service_1_title: 'محطات التحويل MV/LV',
+    service_1_text: 'محطات الجهد المتوسط والمنخفض وأنظمة القياس وهندسة التوزيع.',
+    service_2_title: 'أنظمة السلامة من الحرائق',
+    service_2_text: 'دراسات الكشف والشفط والمكافحة مع ملفات مطابقة لتراخيص البناء.',
+    service_3_title: 'التدقيق والتصرف في الطاقة',
+    service_3_text: 'تشخيص الاستهلاك وخطط التحسين ومرافقة تطبيق ISO 50001.',
+    service_4_title: 'الهندسة الفوطاضوئية',
+    service_4_text: 'ملفات ANME/STEG والحسابات الفنية والمتابعة التنفيذية.',
+    about_title: 'من رخصة البناء إلى القبول النهائي',
+    about_text_1: 'يقع MK ENGINEERING بصفاقس تونس ويتدخل في جميع مراحل المشروع من المصادقة الفنية إلى الاستلام النهائي مع خبرة قوية في الكهرباء والسلامة من الحرائق والفوطاضوئية والتدقيق والتصرف الطاقي.',
+    about_text_2: 'يقدّم المكتب دراسات كاملة وملفات طلب عروض ومخططات تنفيذية ومتابعة ميدانية للمشاريع الصناعية والثالثية والعامة والسكنية داخل تونس وخارجها.',
+    team_title: 'المسار المهني للمؤسس',
+    team_member_1_name: 'KSONTINI MOHAMED',
+    team_member_1_role: 'المؤسس والمدير الاستشاري',
+    team_member_1_text: 'منذ 2013 يقود MK ENGINEERING في دراسات ومتابعة الكهرباء والسلامة من الحرائق والفوطاضوئية والتدقيق والتصرف الطاقي.',
+    team_member_2_name: '2008 - 2013',
+    team_member_2_role: 'مهندس مدير مشاريع - SOTECA Electric',
+    team_member_2_text: 'أدار محطات التحويل والمولدات واللوحات الكهربائية والأتمتة والتيارات القوية والضعيفة والسلامة من الحرائق.',
+    team_member_3_name: '2005 - 2008',
+    team_member_3_role: 'مهندس - MEDPLAST',
+    team_member_3_text: 'ساهم في تركيز خطوط البثق واللوحات الكهربائية وتركيب محطة 630 KVA وإدارة الإنتاج ومراقبة الجودة.',
+    contact_title: 'المعطيات الرسمية للمكتب',
+    contact_info_title: 'بيانات المكتب',
+    label_manager: 'المدير',
+    manager_name: 'KSONTINI MOHAMED',
     label_address: 'العنوان',
     contact_address: 'طريق المهدية كم 0.5 إقامة الجنان<br />الذهبي الطابق الخامس، مكتب عدد 53<br />3002 صفاقس تونس',
     label_phone: 'الهاتف',
+    label_phonefax: 'الهاتف / الفاكس',
     label_mobile: 'الجوال',
     label_email: 'البريد الإلكتروني',
+    office_address: 'شارع المهدية كلم 0.5، عمارة "الجناح الذهبي"<br />الطابق الخامس، مكتب عدد 53، 3002 صفاقس، تونس',
     form_title: 'طلب استشارة',
     form_name: 'الاسم الكامل',
     form_email: 'البريد الإلكتروني',
@@ -71,9 +89,41 @@ const translations = {
     placeholder_phone: '+216 ...',
     placeholder_message: 'اكتب تفاصيل المشروع...',
     sponsors_title: 'شركاؤنا',
-    sponsors_text: 'شبكة مشاريع مع مؤسسات وشركاء عبر قطاعات متعددة.',
-    footer_tagline: 'حلول هندسية معتمدة',
-    footer_services: 'الخدمات',
+    sponsors_text: 'شبكة موثوقة من المؤسسات والمالكين الصناعيين.',
+    activities_badge: 'الأنشطة',
+    activities_title: 'أنشطة مفصلة ومخرجات فنية',
+    activities_block_1_title: 'المخرجات الهندسية',
+    activities_block_1_item_1: 'إعداد ملفات السلامة من الحرائق الخاصة برخص البناء.',
+    activities_block_1_item_2: 'إعداد ملفات الدراسات الفوطاضوئية (ANME, STEG, DAO).',
+    activities_block_1_item_3: 'إعداد كراسات الشروط لأقساط الكهرباء والأمن والفوطاضوئية.',
+    activities_block_1_item_4: 'مخططات أحادية وخطط توزيع وميزانيات قدرة وحسابات الكوابل.',
+    activities_block_1_item_5: 'جداول الكميات ومخططات التنفيذ والتحيين أثناء الإنجاز.',
+    activities_block_2_title: 'الأنظمة المشمولة',
+    activities_block_2_item_1: 'الإنارة الداخلية والخارجية والمآخذ والمحركات وقنوات الكوابل.',
+    activities_block_2_item_2: 'أنظمة التأريض والحماية من الصواعق.',
+    activities_block_2_item_3: 'الشبكات الضعيفة: بيانات وهاتف ومراقبة دخول وكاميرات.',
+    activities_block_2_item_4: 'الكشف والشفط ومكافحة الحرائق.',
+    activities_block_2_item_5: 'محطات التحويل والمولدات ومحطات الطاقة الشمسية.',
+    resources_badge: 'الموارد',
+    resources_title: 'الموارد البشرية والأدوات الهندسية',
+    resources_block_1_title: 'الموارد البشرية',
+    resources_block_1_item_1: 'مهندس كهرباء واحد (18 سنة خبرة).',
+    resources_block_1_item_2: 'مهندس إعلامية واحد (18 سنة خبرة).',
+    resources_block_1_item_3: '3 تقنيين سامين في الكهرباء (أكثر من 8 سنوات خبرة).',
+    resources_block_2_title: 'أدوات البرمجة والمحاكاة',
+    resources_block_2_item_1: 'منظومة MS Office وتقارير تقنية متقدمة.',
+    resources_block_2_item_2: 'AutoCAD و REVIT و SolidWorks.',
+    resources_block_2_item_3: 'CANECO و ECODIAL و DIALUX و PVGIS.',
+    resources_block_2_item_4: 'محاكاة ANME PROFITPV للجهد المنخفض والمتوسط.',
+    training_badge: 'التكوين',
+    training_title: 'أهم الدورات المهنية',
+    training_item_1: 'تكوين ISO 50001:2018 (GIZ-ANME-TUV Rheinland، نوفمبر 2019).',
+    training_item_2: 'تكوين دراسات المشاريع الفوطاضوئية المرتبطة بالشبكة (GIZ-ANME، نوفمبر 2018).',
+    training_item_3: 'تكوين السلامة من الحرائق من طرف الديوان الوطني للحماية المدنية.',
+    training_item_4: 'تكوينات في الأتمتة وAutoCAD والإنجليزية وISO9001 وNavision.',
+    training_item_5: 'تكوين SPC للحقن والبثق بمركز CTC (أفريل 2008).',
+    footer_tagline: 'مكتب دراسات متعدد الاختصاصات',
+    footer_services: 'المجالات المعتمدة',
     footer_contact: 'التواصل',
     err_name: 'يرجى إدخال اسم كامل صحيح.',
     err_email: 'يرجى إدخال بريد إلكتروني صالح.',
@@ -86,18 +136,30 @@ const translations = {
   fr: {
     skip_link: 'Aller au contenu',
     brand_tagline: 'Solutions d ingenierie certifiees',
-    brand_subtitle: 'Azhar Rouiha - Cheffe de Projet',
+    brand_subtitle: 'Mohamed Ksontini - PDG',
     nav_toggle: 'Ouvrir/fermer le menu',
-    nav_services: 'Services',
-    nav_about: 'A Propos',
-    nav_team: 'Equipe',
+    nav_aria: 'Navigation principale',
+    nav_services: 'Domaines d intervention',
+    nav_about: 'Presentation',
+    nav_team: 'Parcours',
     nav_projects: 'Nos Projets',
     nav_contact: 'Contact',
     theme_dark: 'Sombre',
     theme_light: 'Clair',
-    cta_contact: 'Nous Contacter',
+    cta_contact: 'Nous contacter',
+    hero_badge: 'MK ENGINEERING',
+    hero_main_title: 'Bureau d etudes pluridisciplinaire',
+    hero_main_text: 'MK ENGINEERING est un bureau d etudes specialise en electricite, securite incendie, photovoltaique, audit energetique et management de l energie sur toutes les phases de projet.',
+    hero_main_btn_primary: 'Nos Projets',
+    hero_main_btn_secondary: 'Explorer nos domaines',
+    cert_title: 'Expertises certifiees',
+    cert_1: 'Ingenieur conseil en electricite (Certifie par MEHAT)',
+    cert_2: 'Ingenieur conseil en securite incendie (Certifie par ONPC)',
+    cert_3: 'Expert auditeur en energie (Certifie par ANME)',
+    cert_4: 'Expert en photovoltaique (Certifie par ANME)',
+    cert_5: 'Expert en systeme de management de l energie (Certifie par GIZ)',
     eyebrow_hero: 'Bureau de conseil en ingenierie',
-    eyebrow_services: 'Services',
+    eyebrow_services: 'Domaines d intervention',
     eyebrow_about: 'A propos de MK ENGINEERING',
     eyebrow_team: 'Equipe',
     eyebrow_contact: 'Contact',
@@ -106,35 +168,39 @@ const translations = {
     hero_btn_primary: 'Demander une consultation',
     hero_btn_secondary: 'Voir les services',
     hero_panel_title: 'Domaines agrees',
-    services_title: 'Services d ingenierie specialises',
-    service_1_title: 'Electricite',
-    service_1_text: 'Conception et suivi des systemes electriques pour batiments industriels, commerciaux et residentiels selon les normes en vigueur.',
-    service_2_title: 'Protection incendie',
-    service_2_text: 'Etudes de protection, alarme et evacuation avec recommandations techniques pour la securite et la conformite.',
+    services_title: 'Perimetre technique fourni par MK Engineering',
+    service_1_title: 'Postes de transformation MV/LV',
+    service_1_text: 'Postes moyenne et basse tension, comptage et architecture de distribution.',
+    service_2_title: 'Systemes de securite incendie',
+    service_2_text: 'Etudes detection, desenfumage et lutte incendie conformes aux permis.',
     service_3_title: 'Audit et management de l energie',
-    service_3_text: 'Diagnostic de consommation, plans d optimisation et accompagnement a la mise en place de systemes de management energetique.',
-    service_4_title: 'Photovoltaique',
-    service_4_text: 'Etudes et solutions photovoltaiques avec calcul de rentabilite et suivi d execution professionnel.',
-    about_title: 'Expertise certifiee et supervision technique rigoureuse',
-    about_text_1: 'Notre methodologie commence par une analyse precise du projet, suivie de l elaboration des etudes d execution et d un accompagnement terrain conforme aux normes.',
-    about_text_2: 'L equipe se concentre sur des solutions realistes, la maitrise des risques techniques et l equilibre entre performance energetique, durabilite et cout.',
-    team_title: 'Equipe d ingenierie pluridisciplinaire',
-    team_member_1_name: 'Mohamed ksamtini',
-    team_member_1_role: 'PDG',
-    team_member_1_text: 'Pilotage des etudes, coordination technique et verification de la conformite des solutions.',
-    team_member_2_name: 'Equipe Etudes Electriques',
-    team_member_2_role: 'Pole Ingenierie Electrique',
-    team_member_2_text: 'Preparation des plans d execution et des calculs techniques des systemes de puissance, controle et protection.',
-    team_member_3_name: 'Equipe Energies Renouvelables',
-    team_member_3_role: 'Pole Photovoltaique et Energie',
-    team_member_3_text: 'Analyse des performances energetiques, conception de solutions PV et suivi de mise en service.',
-    contact_title: 'Contact direct avec le bureau',
-    contact_info_title: 'Coordonnees',
+    service_3_text: 'Diagnostic de consommation, optimisation et accompagnement ISO 50001.',
+    service_4_title: 'Ingenierie photovoltaique',
+    service_4_text: 'Dossiers ANME/STEG, dimensionnement, rentabilite et suivi d execution.',
+    about_title: 'Du permis de construire a la reception finale',
+    about_text_1: 'MK ENGINEERING est base a Sfax en Tunisie et intervient sur toutes les phases du projet, avec une expertise forte en electricite, securite incendie, photovoltaique, audit et management energetique.',
+    about_text_2: 'Le bureau fournit des etudes completes, des dossiers d appel d offres, des plans d execution et le suivi de chantier pour les projets industriels, tertiaires, publics et residentiels.',
+    team_title: 'Parcours professionnel du fondateur',
+    team_member_1_name: 'KSONTINI MOHAMED',
+    team_member_1_role: 'Fondateur et gerant ingenieur conseil',
+    team_member_1_text: 'Depuis 2013, il dirige MK ENGINEERING dans les etudes et le suivi en electricite, securite incendie, photovoltaique, audit et management energetique.',
+    team_member_2_name: '2008 - 2013',
+    team_member_2_role: 'Ingenieur chef de projets - SOTECA Electric',
+    team_member_2_text: 'Gestion des postes de transformation, groupes electrogenes, tableaux, automatisme, courants forts/faibles et securite incendie.',
+    team_member_3_name: '2005 - 2008',
+    team_member_3_role: 'Ingenieur - MEDPLAST',
+    team_member_3_text: 'Mise en place de lignes d extrusion, armoires electriques, poste 630 KVA, production et controle qualite.',
+    contact_title: 'Informations officielles du bureau',
+    contact_info_title: 'Coordonnees du bureau',
+    label_manager: 'Gerant',
+    manager_name: 'KSONTINI MOHAMED',
     label_address: 'Adresse',
     contact_address: 'Route de Mahdia Km 0.5 Residence El Jenene<br />Eddhahabi 5eme etage, Bureau 53<br />3002 Sfax, Tunisie',
     label_phone: 'Telephone',
+    label_phonefax: 'Telephone / Fax',
     label_mobile: 'Mobile',
     label_email: 'Email',
+    office_address: 'Rue de Mahdia Km 0.5, immeuble "Al Janah Al Dhahabi"<br />5eme etage, bureau N 53, 3002 Sfax, Tunisie',
     form_title: 'Demande de consultation',
     form_name: 'Nom complet',
     form_email: 'Email',
@@ -148,9 +214,41 @@ const translations = {
     placeholder_phone: '+216 ...',
     placeholder_message: 'Decrivez votre projet...',
     sponsors_title: 'Nos Partenaires',
-    sponsors_text: 'Un reseau de projets avec des institutions et des partenaires multisectoriels.',
-    footer_tagline: 'Solutions d ingenierie certifiees',
-    footer_services: 'Services',
+    sponsors_text: 'Un reseau fiable d institutions et de proprietaires industriels.',
+    activities_badge: 'Activites',
+    activities_title: 'Activites detaillees et livrables',
+    activities_block_1_title: 'Livrables d ingenierie',
+    activities_block_1_item_1: 'Dossiers de securite incendie pour depots de permis de construire.',
+    activities_block_1_item_2: 'Dossiers d etudes photovoltaiques (ANME, STEG, DAO).',
+    activities_block_1_item_3: 'Dossiers d appels d offres pour lots electricite, securite et PV.',
+    activities_block_1_item_4: 'Schemas unifilaires, synoptiques, bilans de puissance et calculs de cables.',
+    activities_block_1_item_5: 'Devis quantitatifs, shop drawings et mises a jour chantier.',
+    activities_block_2_title: 'Systemes couverts',
+    activities_block_2_item_1: 'Eclairage interieur/exterieur, prises, moteurs, chemins de cables.',
+    activities_block_2_item_2: 'Mise a la terre et protection foudre.',
+    activities_block_2_item_3: 'Courants faibles: data, telephone, controle d acces, CCTV.',
+    activities_block_2_item_4: 'Detection incendie, desenfumage et lutte incendie.',
+    activities_block_2_item_5: 'Postes de transformation, groupes electrogenes, centrales PV.',
+    resources_badge: 'Ressources',
+    resources_title: 'Ressources humaines et outils d ingenierie',
+    resources_block_1_title: 'Ressources humaines',
+    resources_block_1_item_1: '1 Ingenieur electricien (18 ans d experience).',
+    resources_block_1_item_2: '1 Ingenieur informatique (18 ans d experience).',
+    resources_block_1_item_3: '3 Techniciens superieurs electricite (8+ ans d experience).',
+    resources_block_2_title: 'Outils numeriques et simulation',
+    resources_block_2_item_1: 'Ecosysteme MS Office et reporting avance.',
+    resources_block_2_item_2: 'AutoCAD, REVIT, SolidWorks.',
+    resources_block_2_item_3: 'CANECO, ECODIAL, DIALUX, PVGIS.',
+    resources_block_2_item_4: 'Simulation ANME PROFITPV BT et MT.',
+    training_badge: 'Formation',
+    training_title: 'Formations professionnelles principales',
+    training_item_1: 'Formation ISO 50001:2018 (GIZ-ANME-TUV Rheinland, novembre 2019).',
+    training_item_2: 'Formation projets PV raccordes reseau (GIZ-ANME, novembre 2018).',
+    training_item_3: 'Formation securite incendie par l Office National de la Protection Civile.',
+    training_item_4: 'Formations automatisme, AutoCAD, anglais, ISO9001 et Navision.',
+    training_item_5: 'Formation SPC injection/extrusion au CTC (avril 2008).',
+    footer_tagline: 'Bureau d etudes pluridisciplinaire',
+    footer_services: 'Domaines certifies',
     footer_contact: 'Contact',
     err_name: 'Veuillez saisir un nom complet valide.',
     err_email: 'Veuillez saisir un email valide.',
@@ -163,55 +261,71 @@ const translations = {
   en: {
     skip_link: 'Skip to content',
     brand_tagline: 'Certified Engineering Solutions',
-    brand_subtitle: 'Azhar Rouiha - Project Lead',
+    brand_subtitle: 'Mohamed Ksontini - Ceo ',
     nav_toggle: 'Open and close menu',
-    nav_services: 'Services',
-    nav_about: 'About',
-    nav_team: 'Team',
+    nav_aria: 'Primary navigation',
+    nav_services: 'Areas of Intervention',
+    nav_about: 'Presentation',
+    nav_team: 'Professional Career',
     nav_projects: 'Our Projects',
     nav_contact: 'Contact',
     theme_dark: 'Dark',
     theme_light: 'Light',
     cta_contact: 'Contact Us',
+    hero_badge: 'MK ENGINEERING',
+    hero_main_title: 'Multidisciplinary Design Office',
+    hero_main_text: 'MK ENGINEERING is a multidisciplinary design office specialized in Electrical Engineering, Fire Safety, Photovoltaic Systems, Energy Audit, and Energy Management across all phases of project delivery.',
+    hero_main_btn_primary: 'Our Projects',
+    hero_main_btn_secondary: 'Explore Scope',
+    cert_title: 'Certified Expertise',
+    cert_1: 'Electrical Consulting Engineer (Certified by MEHAT)',
+    cert_2: 'Fire Safety Consulting Engineer (Certified by ONPC)',
+    cert_3: 'Expert Auditor in Energy (Certified by ANME)',
+    cert_4: 'Expert in Photovoltaic (Certified by ANME)',
+    cert_5: 'Energy Management System Expert (Certified by GIZ)',
     eyebrow_hero: 'Engineering Consultancy Office',
-    eyebrow_services: 'Services',
+    eyebrow_services: 'Areas Of Intervention',
     eyebrow_about: 'About MK ENGINEERING',
-    eyebrow_team: 'Team',
+    eyebrow_team: 'Leadership',
     eyebrow_contact: 'Contact',
     hero_title: 'Certified Engineering Office in Electrical Engineering',
     hero_text: 'MK ENGINEERING delivers precise technical solutions aligned with recognized standards, with professional supervision that ensures safety, compliance, and execution quality at every stage.',
     hero_btn_primary: 'Book a Consultation',
     hero_btn_secondary: 'Explore Services',
     hero_panel_title: 'Accredited Fields',
-    services_title: 'Specialized Engineering Services',
-    service_1_title: 'Electrical Engineering',
-    service_1_text: 'Design and supervision of electrical systems for industrial, commercial, and residential buildings according to approved standards.',
-    service_2_title: 'Fire Protection',
-    service_2_text: 'Preparation of protection, alarm, and evacuation studies with technical recommendations for safety and compliance.',
-    service_3_title: 'Energy Audit and Management Systems',
-    service_3_text: 'Consumption diagnostics, optimization plans, and support for implementing effective energy management systems.',
-    service_4_title: 'Photovoltaics',
-    service_4_text: 'Studies and implementation of photovoltaic solutions with accurate yield calculations and professional execution supervision.',
-    about_title: 'Certified Expertise and Precise Technical Supervision',
-    about_text_1: 'Our engineering methodology starts with detailed project analysis, followed by execution studies and field follow-up to ensure compliance with technical regulations and quality standards.',
-    about_text_2: 'Our team focuses on practical solutions, technical risk control, and balance between energy efficiency, sustainability, and operating cost.',
-    team_title: 'Multidisciplinary Engineering Team',
-    team_member_1_name: 'Mohamed Ksamtini ',
-    team_member_1_role: 'Ceo',
-    team_member_1_text: 'Leads project studies, technical coordination, and compliance checks for all engineering deliverables.',
-    team_member_2_name: 'Electrical Studies Team',
-    team_member_2_role: 'Electrical Engineering Division',
-    team_member_2_text: 'Develops execution drawings and technical calculations for power, control, and protection systems.',
-    team_member_3_name: 'Renewable Energy Team',
-    team_member_3_role: 'PV and Energy Division',
-    team_member_3_text: 'Analyzes energy performance, develops PV solutions, and follows commissioning and testing activities.',
-    contact_title: 'Direct Contact with the Office',
-    contact_info_title: 'Contact Information',
+    services_title: 'Technical Scope Delivered By MK Engineering',
+    service_1_title: 'MV/LV Transformer Stations',
+    service_1_text: 'Medium and low voltage stations, metering systems, and distribution architecture.',
+    service_2_title: 'Fire Safety Systems',
+    service_2_text: 'Fire detection, smoke extraction, firefighting studies, and permit-compliant safety files.',
+    service_3_title: 'Energy Audit and Management',
+    service_3_text: 'Energy diagnostics, optimization plans, and ISO 50001 aligned energy management support.',
+    service_4_title: 'Photovoltaic Engineering',
+    service_4_text: 'ANME/STEG technical files, plant sizing, profitability calculations, and execution follow-up.',
+    about_title: 'From Building Permit To Final Acceptance',
+    about_text_1: 'MK ENGINEERING is located in Sfax, Tunisia and intervenes in all project phases from design approval to commissioning and final acceptance, with strong expertise in electricity, fire safety, photovoltaics, energy audit, and energy management.',
+    about_text_2: 'The office delivers complete studies, tender files, shop drawings, and site monitoring for industrial, tertiary, public, and residential developments in Tunisia and internationally.',
+    team_title: 'Founder Professional Career',
+    team_member_1_name: 'KSONTINI MOHAMED',
+    team_member_1_role: 'Founder and Managing Consulting Engineer',
+    team_member_1_text: 'Since 2013, leads MK ENGINEERING in electrical, fire safety, photovoltaic, energy audit, and energy management studies.',
+    team_member_2_name: '2008 - 2013',
+    team_member_2_role: 'Project Manager Engineer - SOTECA Electric',
+    team_member_2_text: 'Managed transformer stations, generators, electrical boards, automation, high current, low current, and fire safety systems.',
+    team_member_3_name: '2005 - 2008',
+    team_member_3_role: 'Engineer - MEDPLAST',
+    team_member_3_text: 'Set up extrusion lines and electrical cabinets, installed 630 KVA transformer station, and managed production and quality control.',
+    contact_title: 'Official Contact Information',
+    contact_info_title: 'Office Details',
+    label_manager: 'Manager',
+    manager_name: 'KSONTINI MOHAMED',
     label_address: 'Address',
     contact_address: 'Route Mahdia Km 0.5 Residence El Jenene<br />Eddhahabi, 5th Floor, Office 53<br />3002 Sfax, Tunisia',
-    label_phone: 'Phone',
+    label_phone: 'Telephone',
+    label_phonefax: 'Telephone / Fax',
     label_mobile: 'Mobile',
     label_email: 'Email',
+    office_address: 'Street Mahdia Km 0.5, Building "Al Janah Al Dhahabi"<br />5th Floor, No.53, 3002 Sfax, Tunisia',
     form_title: 'Consultation Request',
     form_name: 'Full Name',
     form_email: 'Email',
@@ -225,9 +339,41 @@ const translations = {
     placeholder_phone: '+216 ...',
     placeholder_message: 'Write your project details...',
     sponsors_title: 'Our Partners',
-    sponsors_text: 'A project network built with institutions and partners across sectors.',
-    footer_tagline: 'Certified Engineering Solutions',
-    footer_services: 'Services',
+    sponsors_text: 'A trusted network of institutions and industrial owners.',
+    activities_badge: 'Activities',
+    activities_title: 'Detailed Activities And Deliverables',
+    activities_block_1_title: 'Engineering Deliverables',
+    activities_block_1_item_1: 'Fire safety files for building permit submissions.',
+    activities_block_1_item_2: 'Photovoltaic study files (ANME, STEG, DAO).',
+    activities_block_1_item_3: 'Tender documents for electricity, security, and PV lots.',
+    activities_block_1_item_4: 'Single-line diagrams, synoptics, power budgets, and cable calculations.',
+    activities_block_1_item_5: 'Bills of quantities, shop drawings, and as-built adjustments.',
+    activities_block_2_title: 'Systems Covered',
+    activities_block_2_item_1: 'Interior/exterior lighting, sockets, motors, cable trays, and boards.',
+    activities_block_2_item_2: 'Earthing and lightning protection systems.',
+    activities_block_2_item_3: 'Data, telephone, access control, CCTV, and low current networks.',
+    activities_block_2_item_4: 'Fire detection, smoke extraction, and firefighting systems.',
+    activities_block_2_item_5: 'Transformer stations, generators, and photovoltaic plants.',
+    resources_badge: 'Resources',
+    resources_title: 'Human Resources And Engineering Tools',
+    resources_block_1_title: 'Human Resources',
+    resources_block_1_item_1: '1 Electrical Engineer (18 years experience).',
+    resources_block_1_item_2: '1 Computer Engineer (18 years experience).',
+    resources_block_1_item_3: '3 Senior Electrical Technicians (8+ years experience).',
+    resources_block_2_title: 'IT and Simulation Tools',
+    resources_block_2_item_1: 'MS Office ecosystem and advanced reporting tools.',
+    resources_block_2_item_2: 'AutoCAD, REVIT, SolidWorks.',
+    resources_block_2_item_3: 'CANECO, ECODIAL, DIALUX, PVGIS.',
+    resources_block_2_item_4: 'ANME PROFITPV simulations for BT and MT.',
+    training_badge: 'Training',
+    training_title: 'Selected Professional Training',
+    training_item_1: 'ISO 50001:2018 training (GIZ-ANME-TUV Rheinland, November 2019).',
+    training_item_2: 'PV grid-connected studies upgrading (GIZ-ANME, November 2018).',
+    training_item_3: 'Fire safety training by National Office of Civil Protection.',
+    training_item_4: 'Automation, AutoCAD, English, ISO9001 quality system, and Navision training.',
+    training_item_5: 'SPC training for injection/extrusion at CTC (April 2008).',
+    footer_tagline: 'Multidisciplinary Design Office',
+    footer_services: 'Certified Scope',
     footer_contact: 'Contact',
     err_name: 'Please enter a valid full name.',
     err_email: 'Please enter a valid email address.',
@@ -278,7 +424,7 @@ const applyLanguage = (lang) => {
   document.querySelectorAll('[data-i18n]').forEach((element) => {
     const key = element.dataset.i18n;
     if (!dict[key]) return;
-    if (key === 'contact_address') {
+    if (key === 'contact_address' || key === 'office_address') {
       element.innerHTML = dict[key];
     } else {
       element.textContent = dict[key];
@@ -291,8 +437,18 @@ const applyLanguage = (lang) => {
     element.setAttribute('placeholder', dict[key]);
   });
 
+  document.querySelectorAll('[data-i18n-aria-label]').forEach((element) => {
+    const key = element.dataset.i18nAriaLabel;
+    if (!dict[key]) return;
+    element.setAttribute('aria-label', dict[key]);
+  });
+
   if (langSelect) {
     langSelect.value = lang;
+  }
+
+  if (mainNav && dict.nav_aria) {
+    mainNav.setAttribute('aria-label', dict.nav_aria);
   }
 
   updateThemeButtonLabel();
@@ -303,17 +459,37 @@ window.addEventListener('scroll', updateHeaderState, { passive: true });
 updateHeaderState();
 
 if (navToggle && navList) {
+  const setNavOpen = (open) => {
+    navToggle.setAttribute('aria-expanded', String(open));
+    navList.classList.toggle('open', open);
+    if (navOverlay) {
+      navOverlay.hidden = !open;
+      navOverlay.classList.toggle('open', open);
+    }
+    document.body.classList.toggle('nav-open', open);
+  };
+
   navToggle.addEventListener('click', () => {
     const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-    navToggle.setAttribute('aria-expanded', String(!isExpanded));
-    navList.classList.toggle('open');
+    setNavOpen(!isExpanded);
   });
 
   navList.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
-      navToggle.setAttribute('aria-expanded', 'false');
-      navList.classList.remove('open');
+      setNavOpen(false);
     });
+  });
+
+  if (navOverlay) {
+    navOverlay.addEventListener('click', () => setNavOpen(false));
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setNavOpen(false);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 980) setNavOpen(false);
   });
 }
 
@@ -349,6 +525,92 @@ if (!prefersReducedMotion && revealItems.length) {
   });
 } else {
   revealItems.forEach((item) => item.classList.add('is-visible'));
+}
+
+const ideaSlideshow = document.querySelector('#idea-slideshow');
+const ideaDots = document.querySelector('#idea-dots');
+
+if (ideaSlideshow) {
+  const ideaImages = [
+    'WhatsApp Image 2026-02-26 at 00.08.12 (1).jpeg',
+    'WhatsApp Image 2026-02-26 at 00.08.12 (2).jpeg',
+    'WhatsApp Image 2026-02-26 at 00.08.12 (3).jpeg',
+    'WhatsApp Image 2026-02-26 at 00.08.12.jpeg',
+    'WhatsApp Image 2026-02-26 at 00.08.26 (1).jpeg',
+    'WhatsApp Image 2026-02-26 at 00.08.26.jpeg',
+    'WhatsApp Image 2026-02-26 at 00.08.27 (1).jpeg',
+    'WhatsApp Image 2026-02-26 at 00.08.27 (2) - Copy.jpeg',
+    'WhatsApp Image 2026-02-26 at 00.08.27 (3) - Copy.jpeg',
+    'WhatsApp Image 2026-02-26 at 00.08.27 (4).jpeg',
+    'WhatsApp Image 2026-02-26 at 00.08.27 (5).jpeg',
+    'WhatsApp Image 2026-02-26 at 00.08.27 - Copy.jpeg',
+    'WhatsApp Image 2026-02-26 at 00.08.27.jpeg',
+    'work.png'
+  ];
+
+  ideaImages.forEach((fileName, index) => {
+    const image = document.createElement('img');
+    image.className = `idea-slide${index === 0 ? ' is-active' : ''}`;
+    image.src = encodeURI(`idea/${fileName}`);
+    image.alt = `Engineering project concept ${index + 1}`;
+    image.loading = index === 0 ? 'eager' : 'lazy';
+    image.decoding = 'async';
+    ideaSlideshow.appendChild(image);
+  });
+
+  const slides = Array.from(ideaSlideshow.querySelectorAll('.idea-slide'));
+  if (slides.length) {
+    let activeIndex = Math.max(0, slides.findIndex((slide) => slide.classList.contains('is-active')));
+    if (activeIndex < 0) activeIndex = 0;
+
+    const dots = slides.map((_, index) => {
+      const dot = document.createElement('span');
+      dot.className = 'idea-dot';
+      dot.setAttribute('data-index', String(index));
+      if (ideaDots) ideaDots.appendChild(dot);
+      return dot;
+    });
+
+    const setActiveSlide = (index) => {
+      const nextIndex = (index + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle('is-active', slideIndex === nextIndex);
+      });
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle('active', dotIndex === nextIndex);
+      });
+      activeIndex = nextIndex;
+    };
+
+    setActiveSlide(activeIndex);
+
+    if (!prefersReducedMotion && slides.length > 1) {
+      let timerId = null;
+      const rotate = () => setActiveSlide(activeIndex + 1);
+      const start = () => {
+        if (timerId !== null) return;
+        timerId = window.setInterval(rotate, 2300);
+      };
+      const stop = () => {
+        if (timerId === null) return;
+        window.clearInterval(timerId);
+        timerId = null;
+      };
+
+      start();
+      ideaSlideshow.addEventListener('mouseenter', stop);
+      ideaSlideshow.addEventListener('mouseleave', start);
+      ideaSlideshow.addEventListener('touchstart', stop, { passive: true });
+      ideaSlideshow.addEventListener('touchend', start, { passive: true });
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          stop();
+        } else {
+          start();
+        }
+      });
+    }
+  }
 }
 
 const form = document.querySelector('#contact-form');
