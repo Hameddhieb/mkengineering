@@ -1261,26 +1261,33 @@ ul {
   .header-tools {
     grid-area: tools;
     grid-column: auto;
-    width: 100%;
+    width: auto;
     max-width: 100%;
     justify-self: center;
     justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: 8px;
+    flex-wrap: nowrap;
+    padding: 6px 8px;
+  }
+
+  .lang-switcher {
+    min-width: 76px;
   }
 
   .theme-toggle,
   .lang-select {
-    min-width: 88px;
-    height: 42px;
+    min-width: 76px;
+    height: 40px;
+    font-size: 0.78rem;
   }
 
   .header-cta {
     min-width: 0;
     width: auto;
-    height: 42px;
-    padding-inline: 16px;
-    font-size: 0.9rem;
+    height: 40px;
+    padding-inline: 10px;
+    font-size: 0.78rem;
+    white-space: nowrap;
   }
 
   .hero::before {
