@@ -271,6 +271,10 @@ svg {
   text-align: center;
 }
 
+.site-header .container {
+  width: min(100% - 32px, 1240px);
+}
+
 .section {
   padding-block: var(--space-7);
 }
@@ -422,7 +426,7 @@ ul {
   font-weight: 700;
 }
 
-.brand-subtitle {
+.brand-tagline {
   margin: 0;
   color: #3f4e60;
   font-size: 0.83rem;
@@ -1183,6 +1187,10 @@ ul {
     width: min(100% - 20px, var(--container-max));
   }
 
+  .site-header .container {
+    width: min(100% - 20px, 1240px);
+  }
+
   .site-header {
     backdrop-filter: none;
   }
@@ -1484,6 +1492,10 @@ html[data-theme="dark"] .theme-toggle {
 html[data-theme="dark"] .header-tools {
   background: linear-gradient(180deg, rgba(37, 53, 81, 0.95) 0%, rgba(26, 38, 58, 0.95) 100%);
   border-color: #365074;
+}
+
+html[data-theme="dark"] .brand-tagline {
+  color: #dce8f9;
 }
 
 html[data-theme="dark"] .profile-card {

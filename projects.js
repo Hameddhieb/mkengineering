@@ -580,8 +580,8 @@ const countryNames = {
   Dubai: { ar: 'دبي', fr: 'Dubai', en: 'Dubai' }
 };
 
-let currentLang = localStorage.getItem('mk_lang') || localStorage.getItem('mk_projects_lang') || 'en';
-if (!translations[currentLang]) currentLang = 'en';
+let currentLang = localStorage.getItem('mk_lang') || localStorage.getItem('mk_projects_lang') || 'ar';
+if (!translations[currentLang]) currentLang = 'ar';
 let currentTheme = localStorage.getItem('mk_theme') === 'dark' ? 'dark' : 'light';
 
 const t = (key) => translations[currentLang][key] || translations.en[key] || key;
