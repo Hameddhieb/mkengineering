@@ -367,7 +367,8 @@ const translations = {
   }
 };
 
-let currentLang = 'ar';
+let currentLang = localStorage.getItem('mk_lang') || localStorage.getItem('mk_projects_lang') || 'ar';
+if (!translations[currentLang]) currentLang = 'ar';
 let currentTheme = localStorage.getItem('mk_theme') === 'dark' ? 'dark' : 'light';
 
 const updateThemeButtonLabel = () => {
@@ -435,6 +436,7 @@ const applyLanguage = (lang) => {
 
   updateThemeButtonLabel();
   localStorage.setItem('mk_lang', lang);
+  localStorage.setItem('mk_projects_lang', lang);
 };
 
 window.addEventListener('scroll', updateHeaderState, { passive: true });
@@ -484,6 +486,12 @@ if (themeToggle) {
     applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
   });
 }
+
+window.addEventListener('storage', (event) => {
+  if ((event.key === 'mk_lang' || event.key === 'mk_projects_lang') && event.newValue && translations[event.newValue] && event.newValue !== currentLang) {
+    applyLanguage(event.newValue);
+  }
+});
 
 const revealItems = document.querySelectorAll('.reveal');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -713,4 +721,4 @@ if (form) {
 }
 
 applyTheme(currentTheme, false);
-applyLanguage(localStorage.getItem('mk_lang') || 'ar');
+applyLanguage(currentLang);

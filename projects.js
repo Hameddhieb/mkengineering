@@ -580,7 +580,7 @@ const countryNames = {
   Dubai: { ar: 'دبي', fr: 'Dubai', en: 'Dubai' }
 };
 
-let currentLang = localStorage.getItem('mk_projects_lang') || 'en';
+let currentLang = localStorage.getItem('mk_lang') || localStorage.getItem('mk_projects_lang') || 'en';
 if (!translations[currentLang]) currentLang = 'en';
 let currentTheme = localStorage.getItem('mk_theme') === 'dark' ? 'dark' : 'light';
 
@@ -739,6 +739,7 @@ const applyLanguage = (lang) => {
   updateCountryFilterLabels();
   renderStats();
   renderTable();
+  localStorage.setItem('mk_lang', lang);
   localStorage.setItem('mk_projects_lang', lang);
 };
 
@@ -752,6 +753,12 @@ if (themeToggle) {
     applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
   });
 }
+
+window.addEventListener('storage', (event) => {
+  if ((event.key === 'mk_lang' || event.key === 'mk_projects_lang') && event.newValue && translations[event.newValue] && event.newValue !== currentLang) {
+    applyLanguage(event.newValue);
+  }
+});
 
 if (navToggle && navList) {
   const setNavOpen = (open) => {
