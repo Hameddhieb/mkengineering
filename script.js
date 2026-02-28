@@ -44,7 +44,7 @@ const translations = {
     hero_btn_secondary: 'استعرض الخدمات',
     hero_panel_title: 'مجالات الاعتماد',
     services_title: 'النطاق التقني الذي يقدمه MK Engineering',
-    service_1_title: 'محطات التحويل MV/LV',
+    service_1_title: 'محطات التحويل MT/BT',
     service_1_text: 'محطات الجهد المتوسط والمنخفض وأنظمة القياس وهندسة التوزيع.',
     service_2_title: 'أنظمة السلامة من الحرائق',
     service_2_text: 'دراسات الكشف والشفط والمكافحة مع ملفات مطابقة لتراخيص البناء.',
@@ -56,19 +56,13 @@ const translations = {
     about_text_1: 'يقع MK ENGINEERING بصفاقس تونس ويتدخل في جميع مراحل المشروع من المصادقة الفنية إلى الاستلام النهائي مع خبرة قوية في الكهرباء والسلامة من الحرائق والفوطاضوئية والتدقيق والتصرف الطاقي.',
     about_text_2: 'يقدّم المكتب دراسات كاملة وملفات طلب عروض ومخططات تنفيذية ومتابعة ميدانية للمشاريع الصناعية والثالثية والعامة والسكنية داخل تونس وخارجها.',
     team_title: 'المسار المهني للمؤسس',
-    team_member_1_name: 'KSONTINI MOHAMED',
+    team_member_1_name: 'KESSENTINI MOHAMED',
     team_member_1_role: 'المؤسس والمدير الاستشاري',
     team_member_1_text: 'منذ 2013 يقود MK ENGINEERING في دراسات ومتابعة الكهرباء والسلامة من الحرائق والفوطاضوئية والتدقيق والتصرف الطاقي.',
-    team_member_2_name: '2008 - 2013',
-    team_member_2_role: 'مهندس مدير مشاريع - SOTECA Electric',
-    team_member_2_text: 'أدار محطات التحويل والمولدات واللوحات الكهربائية والأتمتة والتيارات القوية والضعيفة والسلامة من الحرائق.',
-    team_member_3_name: '2005 - 2008',
-    team_member_3_role: 'مهندس - MEDPLAST',
-    team_member_3_text: 'ساهم في تركيز خطوط البثق واللوحات الكهربائية وتركيب محطة 630 KVA وإدارة الإنتاج ومراقبة الجودة.',
     contact_title: 'المعطيات الرسمية للمكتب',
     contact_info_title: 'بيانات المكتب',
     label_manager: 'المدير',
-    manager_name: 'KSONTINI MOHAMED',
+    manager_name: 'KESSENTINI MOHAMED',
     label_address: 'العنوان',
     contact_address: 'طريق المهدية كم 0.5 إقامة الجنان<br />الذهبي الطابق الخامس، مكتب عدد 53<br />3002 صفاقس تونس',
     label_phone: 'الهاتف',
@@ -136,7 +130,7 @@ const translations = {
   fr: {
     skip_link: "Aller au contenu",
     brand_tagline: "Solutions d'ingénierie certifiées",
-    brand_subtitle: "Mohamed Ksontini - PDG",
+    brand_subtitle: "Mohamed Kessentini - PDG",
     nav_toggle: "Ouvrir/fermer le menu",
     nav_aria: "Navigation principale",
     nav_services: "Domaines d'intervention",
@@ -169,7 +163,7 @@ const translations = {
     hero_btn_secondary: "Voir les services",
     hero_panel_title: "Domaines agréés",
     services_title: "Périmètre technique assuré par MK Engineering",
-    service_1_title: "Postes de transformation MV/LV",
+    service_1_title: "Postes de transformation MT/BT",
     service_1_text: "Postes moyenne et basse tension, comptage et architecture de distribution.",
     service_2_title: "Systèmes de sécurité incendie",
     service_2_text: "Études de détection, désenfumage et lutte contre l'incendie conformes aux exigences réglementaires.",
@@ -181,19 +175,13 @@ const translations = {
     about_text_1: "MK ENGINEERING est basé à Sfax, en Tunisie, et intervient sur toutes les phases du projet, avec une expertise solide en électricité, sécurité incendie, photovoltaïque, audit et management énergétique.",
     about_text_2: "Le bureau réalise des études complètes, des dossiers d'appels d'offres, des plans d'exécution et le suivi de chantier pour des projets industriels, tertiaires, publics et résidentiels.",
     team_title: "Parcours professionnel du fondateur",
-    team_member_1_name: "KSONTINI MOHAMED",
+    team_member_1_name: "KESSENTINI MOHAMED",
     team_member_1_role: "Fondateur et gérant, ingénieur-conseil",
     team_member_1_text: "Depuis 2013, il dirige MK ENGINEERING dans les études et le suivi en électricité, sécurité incendie, photovoltaïque, audit et management énergétique.",
-    team_member_2_name: "2008 - 2013",
-    team_member_2_role: "Ingénieur chef de projets - SOTECA Electric",
-    team_member_2_text: "Gestion des postes de transformation, groupes électrogènes, tableaux, automatisme, courants forts/faibles et sécurité incendie.",
-    team_member_3_name: "2005 - 2008",
-    team_member_3_role: "Ingénieur - MEDPLAST",
-    team_member_3_text: "Mise en place de lignes d'extrusion, armoires électriques, poste 630 KVA, production et contrôle qualité.",
     contact_title: "Informations officielles du bureau",
     contact_info_title: "Coordonnées du bureau",
     label_manager: "Gérant",
-    manager_name: "KSONTINI MOHAMED",
+    manager_name: "KESSENTINI MOHAMED",
     label_address: "Adresse",
     contact_address: "Route de Mahdia Km 0.5, Résidence El Jenene<br />Eddhahabi, 5e étage, bureau 53<br />3002 Sfax, Tunisie",
     label_phone: "Téléphone",
@@ -261,7 +249,7 @@ const translations = {
   en: {
     skip_link: 'Skip to content',
     brand_tagline: 'Certified Engineering Solutions',
-    brand_subtitle: 'Mohamed Ksontini - Ceo ',
+    brand_subtitle: 'Mohamed Kessentini - Ceo ',
     nav_toggle: 'Open and close menu',
     nav_aria: 'Primary navigation',
     nav_services: 'Areas of Intervention',
@@ -294,7 +282,7 @@ const translations = {
     hero_btn_secondary: 'Explore Services',
     hero_panel_title: 'Accredited Fields',
     services_title: 'Technical Scope Delivered By MK Engineering',
-    service_1_title: 'MV/LV Transformer Stations',
+    service_1_title: 'MT/BT Transformer Stations',
     service_1_text: 'Medium and low voltage stations, metering systems, and distribution architecture.',
     service_2_title: 'Fire Safety Systems',
     service_2_text: 'Fire detection, smoke extraction, firefighting studies, and permit-compliant safety files.',
@@ -306,19 +294,13 @@ const translations = {
     about_text_1: 'MK ENGINEERING is located in Sfax, Tunisia and intervenes in all project phases from design approval to commissioning and final acceptance, with strong expertise in electricity, fire safety, photovoltaics, energy audit, and energy management.',
     about_text_2: 'The office delivers complete studies, tender files, shop drawings, and site monitoring for industrial, tertiary, public, and residential developments in Tunisia and internationally.',
     team_title: 'Founder Professional Career',
-    team_member_1_name: 'KSONTINI MOHAMED',
+    team_member_1_name: 'KESSENTINI MOHAMED',
     team_member_1_role: 'Founder and Managing Consulting Engineer',
     team_member_1_text: 'Since 2013, leads MK ENGINEERING in electrical, fire safety, photovoltaic, energy audit, and energy management studies.',
-    team_member_2_name: '2008 - 2013',
-    team_member_2_role: 'Project Manager Engineer - SOTECA Electric',
-    team_member_2_text: 'Managed transformer stations, generators, electrical boards, automation, high current, low current, and fire safety systems.',
-    team_member_3_name: '2005 - 2008',
-    team_member_3_role: 'Engineer - MEDPLAST',
-    team_member_3_text: 'Set up extrusion lines and electrical cabinets, installed 630 KVA transformer station, and managed production and quality control.',
     contact_title: 'Official Contact Information',
     contact_info_title: 'Office Details',
     label_manager: 'Manager',
-    manager_name: 'KSONTINI MOHAMED',
+    manager_name: 'KESSENTINI MOHAMED',
     label_address: 'Address',
     contact_address: 'Route Mahdia Km 0.5 Residence El Jenene<br />Eddhahabi, 5th Floor, Office 53<br />3002 Sfax, Tunisia',
     label_phone: 'Telephone',
@@ -525,6 +507,35 @@ if (!prefersReducedMotion && revealItems.length) {
   });
 } else {
   revealItems.forEach((item) => item.classList.add('is-visible'));
+}
+
+const heroSection = document.querySelector('.hero');
+
+if (heroSection) {
+  const heroImages = [
+    '1.png',
+    '11111111111.webp',
+    'v2_Photo - 1.jpg',
+    'v2_Photo - 4.jpg',
+    'v2_Photo - 7.jpg',
+    'v2_Photo - 8.jpg'
+  ];
+
+  let currentHeroIndex = 0;
+  const applyHeroImage = (index) => {
+    const nextIndex = (index + heroImages.length) % heroImages.length;
+    const imagePath = encodeURI(`hero/${heroImages[nextIndex]}`);
+    heroSection.style.setProperty('--hero-background-image', `url("${imagePath}")`);
+    currentHeroIndex = nextIndex;
+  };
+
+  applyHeroImage(currentHeroIndex);
+
+  if (heroImages.length > 1) {
+    window.setInterval(() => {
+      applyHeroImage(currentHeroIndex + 1);
+    }, 2000);
+  }
 }
 
 const ideaSlideshow = document.querySelector('#idea-slideshow');

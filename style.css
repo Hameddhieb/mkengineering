@@ -611,7 +611,7 @@ ul {
 .hero {
   position: relative;
   overflow: hidden;
-  background-image: linear-gradient(106deg, rgba(10, 31, 58, 0.92) 10%, rgba(23, 62, 109, 0.74) 52%, rgba(51, 78, 125, 0.58) 100%), url("background.jpg");
+  background-image: linear-gradient(106deg, rgba(10, 31, 58, 0.92) 10%, rgba(23, 62, 109, 0.74) 52%, rgba(51, 78, 125, 0.58) 100%), var(--hero-background-image, url("hero/1.png"));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1163,7 +1163,8 @@ ul {
   }
 
   .team-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 760px);
+    justify-content: center;
   }
 
   .profile-grid {
@@ -1350,6 +1351,10 @@ ul {
     gap: var(--space-3);
   }
 
+  .main-nav {
+    justify-self: center;
+  }
+
   .nav-toggle {
     display: none;
   }
@@ -1357,13 +1362,37 @@ ul {
   .nav-list {
     position: static;
     display: flex;
+    align-items: center;
     flex-direction: row;
-    gap: var(--space-3);
-    min-width: auto;
-    padding: 0;
-    border: none;
-    box-shadow: none;
+    gap: 6px;
+    min-width: 0;
+    padding: 6px;
+    border: 1px solid #c7d5e8;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);
+    box-shadow: 0 10px 22px rgba(11, 45, 86, 0.1);
     justify-content: center;
+  }
+
+  .nav-list a {
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 0.84rem;
+    letter-spacing: 0.04em;
+    border: 1px solid transparent;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .nav-list a:hover,
+  .nav-list a:focus-visible {
+    color: #102f56;
+    background: rgba(255, 255, 255, 0.9);
+    border-color: #b5c8e4;
+    box-shadow: 0 6px 14px rgba(14, 43, 81, 0.08);
+  }
+
+  .header-tools {
+    justify-self: end;
   }
 
   .hero-grid {
@@ -1394,7 +1423,8 @@ ul {
   }
 
   .team-grid {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: minmax(0, 860px);
+    justify-content: center;
   }
 }
 
