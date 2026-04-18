@@ -35,45 +35,50 @@
   <a class="skip-link" href="#main-content" data-i18n="skip_link">تجاوز إلى المحتوى</a>
 
   <header class="site-header" id="top">
-    <div class="container header-inner">
-      <a class="brand-block" href="#top">
-        <img class="brand-logo" src="logo.png" alt="MK Engineering Logo" width="70" height="70" decoding="async" fetchpriority="high" />
-        <div>
-          <p class="brand-name" lang="en">MK ENGINEERING</p>
-          <p class="brand-tagline" data-i18n="brand_tagline">حلول هندسية معتمدة</p>
-        </div>
-      </a>
+    <div class="container">
+      <div class="header-inner">
+        <a class="brand-block" href="#top">
+          <span class="brand-logo-shell">
+            <img class="brand-logo" src="logo.png" alt="MK Engineering Logo" width="70" height="70" decoding="async" fetchpriority="high" />
+          </span>
+          <span class="brand-copy">
+            <p class="brand-name" lang="en">MK ENGINEERING</p>
+            <p class="brand-tagline" data-i18n="brand_tagline">حلول هندسية معتمدة</p>
+          </span>
+        </a>
 
-      <nav class="main-nav" aria-label="التنقل الرئيسي" data-i18n-aria-label="nav_aria">
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-list">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span class="sr-only" data-i18n="nav_toggle">فتح وإغلاق القائمة</span>
-        </button>
-        <ul id="nav-list" class="nav-list">
-          <li><a href="#services" data-i18n="nav_services">الخدمات</a></li>
-          <li><a href="#about" data-i18n="nav_about">من نحن</a></li>
-          <li><a href="#team" data-i18n="nav_team">فريقنا</a></li>
-          <li><a href="our-projets.html" data-i18n="nav_projects">مشاريعنا</a></li>
-          <li><a href="#contact" data-i18n="nav_contact">التواصل</a></li>
-        </ul>
-      </nav>
-      <div class="nav-overlay" id="nav-overlay" hidden></div>
+        <nav class="main-nav" aria-label="التنقل الرئيسي" data-i18n-aria-label="nav_aria">
+          <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-list">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span class="sr-only" data-i18n="nav_toggle">فتح وإغلاق القائمة</span>
+          </button>
+          <ul id="nav-list" class="nav-list">
+            <li><a class="nav-link" href="#services" data-i18n="nav_services">الخدمات</a></li>
+            <li><a class="nav-link" href="#about" data-i18n="nav_about">من نحن</a></li>
+            <li><a class="nav-link" href="#team" data-i18n="nav_team">فريقنا</a></li>
+            <li><a class="nav-link" href="our-projets.html" data-i18n="nav_projects">مشاريعنا</a></li>
+            <li><a class="nav-link" href="#contact" data-i18n="nav_contact">التواصل</a></li>
+          </ul>
+        </nav>
+        <div class="nav-overlay" id="nav-overlay" hidden></div>
 
-      <div class="header-tools">
-        <button id="theme-toggle" class="theme-toggle" type="button">
-          Dark
-        </button>
-        <div class="lang-switcher">
-          <label class="sr-only" for="language-select">Language</label>
-          <select id="language-select" class="lang-select" aria-label="Language selector">
-            <option value="ar">AR</option>
-            <option value="fr">FR</option>
-            <option value="en">EN</option>
-          </select>
+        <div class="header-tools">
+          <button id="theme-toggle" class="theme-toggle" type="button">
+            Dark
+          </button>
+          <div class="lang-switcher">
+            <span class="tool-label" data-i18n="lang_label">Language</span>
+            <label class="sr-only" for="language-select" data-i18n="lang_label">Language</label>
+            <select id="language-select" class="lang-select" aria-label="Language selector">
+              <option value="ar">AR</option>
+              <option value="fr">FR</option>
+              <option value="en">EN</option>
+            </select>
+          </div>
+          <a class="btn btn-primary header-cta" href="#contact" data-i18n="cta_contact">اتصل بنا</a>
         </div>
-        <a class="btn btn-primary header-cta" href="#contact" data-i18n="cta_contact">اتصل بنا</a>
       </div>
     </div>
   </header>
@@ -93,13 +98,13 @@
           </div>
         </div>
         <aside class="hero-panel reveal" aria-label="Certifications">
-          <h2 data-i18n="cert_title">Certified Expertise</h2>
+          <h2 data-i18n="cert_title">Accredited Expertise</h2>
           <ul>
-            <li data-i18n="cert_1">Electrical Consulting Engineer (Certified by MEHAT)</li>
-            <li data-i18n="cert_2">Fire Safety Consulting Engineer (Certified by ONPC)</li>
-            <li data-i18n="cert_3">Expert Auditor in Energy (Certified by ANME)</li>
-            <li data-i18n="cert_4">Expert in Photovoltaic (Certified by ANME)</li>
-            <li data-i18n="cert_5">Energy Management System Expert (Certified by GIZ)</li>
+            <li data-i18n="cert_1">Electrical Consulting Engineer (Accredited by MEHAT)</li>
+            <li data-i18n="cert_2">Fire Safety Consulting Engineer (Accredited by ONPC)</li>
+            <li data-i18n="cert_3">Expert Auditor in Energy (Accredited by ANME)</li>
+            <li data-i18n="cert_4">Expert in Photovoltaic (Accredited by ANME)</li>
+            <li data-i18n="cert_5">Energy Management System Expert (Accredited by GIZ)</li>
           </ul>
         </aside>
       </div>
@@ -423,7 +428,7 @@
         <p class="footer-tagline" data-i18n="footer_tagline">Multidisciplinary Design Office</p>
       </div>
       <div>
-        <h4 data-i18n="footer_services">Certified Scope</h4>
+        <h4 data-i18n="footer_services">Accredited Scope</h4>
         <ul>
           <li data-i18n="service_1_title">Electrical Engineering</li>
           <li data-i18n="service_2_title">Fire Safety Systems</li>

@@ -16,51 +16,56 @@
   <a class="skip-link" href="#projects-main" data-i18n="skip_link">Skip to content</a>
 
   <header class="site-header" id="top">
-    <div class="container header-inner">
-      <a class="brand-block" href="index.html">
-        <img class="brand-logo" src="logo.png" alt="MK Engineering Logo" width="70" height="70" decoding="async" />
-        <div>
-          <p class="brand-name" lang="en">MK ENGINEERING</p>
-          <p class="brand-tagline" data-i18n="brand_tagline">Certified Engineering Solutions</p>
-        </div>
-      </a>
+    <div class="container">
+      <div class="header-inner">
+        <a class="brand-block" href="index.html">
+          <span class="brand-logo-shell">
+            <img class="brand-logo" src="logo.png" alt="MK Engineering Logo" width="70" height="70" decoding="async" />
+          </span>
+          <span class="brand-copy">
+            <p class="brand-name" lang="en">MK ENGINEERING</p>
+            <p class="brand-tagline" data-i18n="brand_tagline">Accredited Engineering Solutions</p>
+          </span>
+        </a>
 
-      <nav class="main-nav" aria-label="Primary navigation" data-i18n-aria-label="nav_aria">
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-list">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span class="sr-only" data-i18n="nav_toggle">Open and close menu</span>
-        </button>
-        <ul id="nav-list" class="nav-list">
-          <li><a href="index.html#services" data-i18n="nav_services">Services</a></li>
-          <li><a href="index.html#about" data-i18n="nav_about">About</a></li>
-          <li><a href="index.html#team" data-i18n="nav_team">Team</a></li>
-          <li><a href="our-projets.html" data-i18n="nav_projects">Our Projects</a></li>
-          <li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="nav-overlay" id="nav-overlay" hidden></div>
+        <nav class="main-nav" aria-label="Primary navigation" data-i18n-aria-label="nav_aria">
+          <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-list">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span class="sr-only" data-i18n="nav_toggle">Open and close menu</span>
+          </button>
+          <ul id="nav-list" class="nav-list">
+            <li><a class="nav-link" href="index.html#services" data-i18n="nav_services">Services</a></li>
+            <li><a class="nav-link" href="index.html#about" data-i18n="nav_about">About</a></li>
+            <li><a class="nav-link" href="index.html#team" data-i18n="nav_team">Team</a></li>
+            <li><a class="nav-link" href="our-projets.html" data-i18n="nav_projects" aria-current="page">Our Projects</a></li>
+            <li><a class="nav-link" href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="nav-overlay" id="nav-overlay" hidden></div>
 
-      <div class="header-tools">
-        <button id="theme-toggle-projects" class="theme-toggle" type="button">
-          Dark
-        </button>
-        <div class="lang-switcher">
-          <label class="sr-only" for="projects-language" data-i18n="lang_label">Language</label>
-          <select id="projects-language" class="lang-select" aria-label="Language selector">
-            <option value="ar">AR</option>
-            <option value="fr">FR</option>
-            <option value="en">EN</option>
-          </select>
+        <div class="header-tools">
+          <button id="theme-toggle-projects" class="theme-toggle" type="button">
+            Dark
+          </button>
+          <div class="lang-switcher">
+            <span class="tool-label" data-i18n="lang_label">Language</span>
+            <label class="sr-only" for="projects-language" data-i18n="lang_label">Language</label>
+            <select id="projects-language" class="lang-select" aria-label="Language selector">
+              <option value="ar">AR</option>
+              <option value="fr">FR</option>
+              <option value="en">EN</option>
+            </select>
+          </div>
+          <a class="btn btn-primary header-cta" href="index.html#contact" data-i18n="cta_contact">Contact Us</a>
         </div>
-        <a class="btn btn-primary header-cta" href="index.html#contact" data-i18n="cta_contact">Contact Us</a>
       </div>
     </div>
   </header>
 
   <main id="projects-main">
-    <section class="sponsor-band">
+    <section class="sponsor-band reveal">
       <div class="container">
         <div class="sponsor-marquee" aria-label="Sponsorship references" data-i18n-aria-label="sponsor_aria">
           <div class="sponsor-track">
@@ -94,7 +99,7 @@
     </section>
 
     <section class="hero section">
-      <div class="container">
+      <div class="container reveal">
         <p class="eyebrow" data-i18n="hero_eyebrow">PROJECT REFERENCES</p>
         <h1 data-i18n="hero_title">Our Projects</h1>
         <p class="hero-text" data-i18n="hero_text">Detailed portfolio of MK Engineering references across Tunisia, Libya, Algeria, Mauritania, Oman, Ivory Coast, Burkina Faso, and UAE.</p>
@@ -109,7 +114,7 @@
 
     <section class="section section-muted">
       <div class="container">
-        <div class="controls-wrap">
+        <div class="controls-wrap reveal">
           <div class="control-field">
             <label for="country-filter" data-i18n="label_country">Country</label>
             <select id="country-filter">
@@ -122,7 +127,7 @@
           </div>
         </div>
 
-        <div class="table-shell">
+        <div class="table-shell reveal">
           <table class="projects-table">
             <thead>
               <tr>
@@ -136,13 +141,13 @@
             <tbody id="projects-tbody"></tbody>
           </table>
         </div>
-        <p class="results-line"><span data-i18n="results_prefix">Showing</span> <strong id="results-count">0</strong> <span data-i18n="results_suffix">references</span></p>
+        <p class="results-line reveal"><span data-i18n="results_prefix">Showing</span> <strong id="results-count">0</strong> <span data-i18n="results_suffix">references</span></p>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-inner">
+    <div class="container footer-inner reveal">
       <p>© 2026 MK Engineering</p>
       <a href="index.html" data-i18n="back_main">Back to main website</a>
     </div>

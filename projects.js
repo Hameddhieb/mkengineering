@@ -455,9 +455,9 @@ const translations = {
     nav_toggle: 'فتح وإغلاق القائمة',
     nav_aria: 'التنقل الرئيسي',
     nav_home: 'الرئيسية',
-    nav_services: 'الخدمات',
-    nav_about: 'من نحن',
-    nav_team: 'فريقنا',
+    nav_services: 'مجالات التدخل',
+    nav_about: 'التعريف',
+    nav_team: 'المسار المهني',
     nav_projects: 'مشاريعنا',
     nav_contact: 'التواصل',
     cta_contact: 'تواصل معنا',
@@ -491,13 +491,13 @@ const translations = {
     page_title: "MK ENGINEERING | Nos projets",
     page_description: "MK Engineering - Nos projets: références d'ingénierie internationales dans l'industrie, la santé, l'énergie et l'infrastructure.",
     skip_link: "Aller au contenu",
-    brand_tagline: "Solutions d'ingénierie certifiées",
+    brand_tagline: "Solutions d'ingénierie agréées",
     nav_toggle: "Ouvrir/fermer le menu",
     nav_aria: "Navigation principale",
     nav_home: "Accueil",
-    nav_services: "Services",
-    nav_about: "À propos",
-    nav_team: "Équipe",
+    nav_services: "Domaines d'intervention",
+    nav_about: "Présentation",
+    nav_team: "Parcours professionnel",
     nav_projects: "Nos projets",
     nav_contact: "Contact",
     cta_contact: "Nous contacter",
@@ -531,13 +531,13 @@ const translations = {
     page_title: 'MK ENGINEERING | Our Projects',
     page_description: 'MK Engineering - Our Projects: International engineering references across industry, healthcare, energy, and infrastructure.',
     skip_link: 'Skip to content',
-    brand_tagline: 'Certified Engineering Solutions',
+    brand_tagline: 'Accredited Engineering Solutions',
     nav_toggle: 'Open and close menu',
     nav_aria: 'Primary navigation',
     nav_home: 'Home',
-    nav_services: 'Services',
-    nav_about: 'About',
-    nav_team: 'Team',
+    nav_services: 'Areas of Intervention',
+    nav_about: 'Presentation',
+    nav_team: 'Professional Career',
     nav_projects: 'Our Projects',
     nav_contact: 'Contact',
     cta_contact: 'Contact Us',
@@ -586,6 +586,50 @@ let currentTheme = localStorage.getItem('mk_theme') === 'dark' ? 'dark' : 'light
 
 const t = (key) => translations[currentLang][key] || translations.en[key] || key;
 const countryLabel = (country) => countryNames[country]?.[currentLang] || country;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let revealObserver;
+
+const collectRevealItems = (scope = document) => {
+  const items = [];
+  if (scope instanceof Element && scope.matches('.reveal')) items.push(scope);
+  if ('querySelectorAll' in scope) items.push(...scope.querySelectorAll('.reveal'));
+  return items;
+};
+
+const setupRevealAnimations = (scope = document) => {
+  const items = collectRevealItems(scope).filter((item) => !item.dataset.revealReady);
+  if (!items.length) return;
+
+  if (prefersReducedMotion) {
+    items.forEach((item) => {
+      item.dataset.revealReady = 'true';
+      item.classList.add('is-visible');
+      item.style.transitionDelay = '0ms';
+    });
+    return;
+  }
+
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.14, rootMargin: '0px 0px -40px 0px' }
+    );
+  }
+
+  items.forEach((item, index) => {
+    item.dataset.revealReady = 'true';
+    const baseDelay = Number(item.dataset.revealDelay || 0);
+    item.style.transitionDelay = `${Math.min(baseDelay + index * 55, 280)}ms`;
+    revealObserver.observe(item);
+  });
+};
 
 const updateThemeButtonLabel = () => {
   if (!themeToggle) return;
@@ -622,13 +666,15 @@ const renderStats = () => {
   statsGrid.innerHTML = cards
     .map(
       (card) => `
-      <article class="stat">
+      <article class="stat reveal">
         <div class="num">${card.value}</div>
         <div class="label">${card.label}</div>
       </article>
     `
     )
     .join('');
+
+  setupRevealAnimations(statsGrid);
 };
 
 const buildCountryFilter = () => {
@@ -676,17 +722,18 @@ const renderTable = () => {
 
   if (!rows.length) {
     tbody.innerHTML = `
-      <tr class="no-data-row">
+      <tr class="no-data-row reveal">
         <td colspan="5" class="result-note">${t('no_results')}</td>
       </tr>
     `;
+    setupRevealAnimations(tbody);
     return;
   }
 
   tbody.innerHTML = rows
     .map(
       (project, index) => `
-      <tr>
+      <tr class="reveal" data-reveal-delay="${Math.min(index * 20, 180)}">
         <td data-label="${labels.number}">${index + 1}</td>
         <td data-label="${labels.owner}">${project.owner}</td>
         <td data-label="${labels.country}">${countryLabel(project.country)}</td>
@@ -696,6 +743,8 @@ const renderTable = () => {
     `
     )
     .join('');
+
+  setupRevealAnimations(tbody);
 };
 
 const applyLanguage = (lang) => {
@@ -798,3 +847,4 @@ if (navToggle && navList) {
 buildCountryFilter();
 applyTheme(currentTheme, false);
 applyLanguage(currentLang);
+setupRevealAnimations(document);
