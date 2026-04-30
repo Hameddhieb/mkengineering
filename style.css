@@ -13,6 +13,7 @@
   --color-success: #2f7a4d;
   --color-error: #8a3d2f;
   --container-max: 1160px;
+  --header-max: 1460px;
   --space-1: 8px;
   --space-2: 16px;
   --space-3: 24px;
@@ -288,7 +289,7 @@ svg {
 }
 
 .site-header .container {
-  width: min(100% - 32px, 1240px);
+  width: min(100% - 32px, var(--header-max));
 }
 
 .section {
@@ -444,13 +445,13 @@ ul {
 .brand-block {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   grid-column: 1 / -1;
-  padding: 10px 14px;
+  padding: 12px 18px;
   border-radius: 24px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(242, 247, 255, 0.88) 100%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
-  min-width: 0;
+  min-width: min(100%, 300px);
 }
 
 .brand-logo-shell {
@@ -467,8 +468,9 @@ ul {
 
 .brand-copy {
   display: grid;
-  gap: 4px;
+  gap: 6px;
   min-width: 0;
+  flex: 1 1 auto;
   text-align: start;
 }
 
@@ -484,17 +486,20 @@ ul {
 .brand-name {
   margin: 0;
   font-family: "Inter", sans-serif;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   color: var(--color-professional);
-  font-size: clamp(1rem, 1.1vw, 1.28rem);
+  font-size: clamp(1.05rem, 1vw, 1.28rem);
   font-weight: 700;
+  line-height: 1.15;
+  white-space: nowrap;
 }
 
 .brand-tagline {
   margin: 0;
   color: #425368;
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   font-weight: 600;
+  line-height: 1.45;
 }
 
 .main-nav {
@@ -834,28 +839,58 @@ ul {
 }
 
 .sponsor-marquee {
+  --sponsor-gap: 16px;
+  --sponsor-height: 150px;
+  --sponsor-duration: 34s;
   position: relative;
-  display: flex;
+  display: block;
+  min-height: var(--sponsor-height);
   overflow: hidden;
+  overflow: clip;
   border: 1px solid var(--color-border);
   background: #ffffff;
   box-shadow: 0 8px 22px rgba(13, 37, 74, 0.06);
+  isolation: isolate;
+}
+
+.sponsor-marquee::before,
+.sponsor-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 52px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.sponsor-marquee::before {
+  inset-inline-start: 0;
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.sponsor-marquee::after {
+  inset-inline-end: 0;
+  background: linear-gradient(270deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
 }
 
 .sponsor-track {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
   align-items: center;
-  flex-shrink: 0;
-  gap: var(--space-2);
-  min-width: 100%;
-  padding: var(--space-2);
-  animation: sponsor-scroll 26s linear infinite;
+  width: max-content;
+  min-width: max-content;
+  gap: var(--sponsor-gap);
+  padding: 12px;
+  animation: sponsor-scroll var(--sponsor-duration) linear infinite;
+  will-change: transform;
 }
 
 .sponsor-track:nth-child(2) {
-  position: absolute;
-  top: 0;
-  left: 100%;
+  left: calc(100% + var(--sponsor-gap));
 }
 
 .sponsor-item {
@@ -866,6 +901,7 @@ ul {
   background: #fff;
   display: grid;
   place-items: center;
+  overflow: hidden;
 }
 
 .sponsor-item img {
@@ -876,8 +912,8 @@ ul {
 }
 
 @keyframes sponsor-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(calc(-100% - var(--sponsor-gap)), 0, 0); }
 }
 
 .services-grid {
@@ -1312,7 +1348,7 @@ ul {
 
 @media (min-width: 760px) {
   .header-inner {
-    grid-template-columns: auto auto 1fr;
+    grid-template-columns: minmax(290px, auto) auto 1fr;
     row-gap: 0;
   }
 
@@ -1344,7 +1380,7 @@ ul {
 
 @media (max-width: 759px) {
   .section {
-    padding-block: 52px;
+    padding-block: 44px;
   }
 
   .container {
@@ -1352,82 +1388,109 @@ ul {
   }
 
   .site-header .container {
-    width: min(100% - 20px, 1240px);
+    width: min(100% - 20px, var(--header-max));
   }
 
   .site-header {
+    padding: 8px 0;
     backdrop-filter: none;
   }
 
   .header-inner {
-    grid-template-columns: 1fr auto;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
       "brand nav"
       "tools tools";
     justify-items: stretch;
-    align-items: start;
-    row-gap: 10px;
-    padding: 12px;
-    border-radius: 24px;
+    align-items: center;
+    gap: 8px 10px;
+    padding: 8px;
+    border-radius: 18px;
+    overflow: visible;
   }
 
   .brand-block {
     grid-area: brand;
     grid-column: auto;
-    justify-self: left;
-    text-align: left;
-    gap: 10px;
-    padding: 10px 12px;
+    width: 100%;
+    min-width: 0;
+    justify-self: stretch;
+    gap: 8px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
   }
 
   .brand-logo-shell {
-    width: 60px;
-    height: 60px;
-    border-radius: 18px;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
   }
 
   .brand-logo {
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .brand-copy {
+    gap: 2px;
+  }
+
+  .brand-name {
+    font-size: clamp(0.78rem, 3.3vw, 0.95rem);
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+  }
+
+  .brand-tagline {
+    display: none;
   }
 
   .main-nav {
     grid-area: nav;
     grid-column: auto;
-    justify-self: right;
-    align-self: start;
+    justify-self: end;
+    align-self: center;
     position: relative;
+    width: auto;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .nav-toggle {
-    width: 48px;
-    height: 44px;
-    border-radius: 12px;
+    width: 42px;
+    height: 42px;
+    padding: 9px;
+    border-radius: 11px;
   }
 
   .nav-list {
     position: fixed;
-    top: 104px;
+    top: 116px;
     left: 50%;
     right: auto;
     transform: translateX(-50%);
-    width: min(92vw, 460px);
+    width: min(calc(100vw - 20px), 430px);
     min-width: 0;
-    max-height: calc(100vh - 132px);
+    max-height: calc(100dvh - 132px);
     overflow-y: auto;
-    border-radius: 22px;
+    border-radius: 16px;
     box-shadow: 0 18px 34px rgba(9, 30, 66, 0.2);
-    padding: 12px;
-    gap: 6px;
+    padding: 8px;
+    gap: 4px;
     z-index: 930;
   }
 
   .nav-list a {
-    min-height: 50px;
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 10px;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 0.94rem;
   }
 
   .header-tools {
@@ -1437,43 +1500,62 @@ ul {
     max-width: 100%;
     justify-self: center;
     justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    padding: 8px;
-    border-radius: 20px;
+    gap: 6px;
+    flex-wrap: nowrap;
+    padding: 6px;
+    border-radius: 14px;
   }
 
   .lang-switcher {
-    min-width: 118px;
-    flex: 1 1 128px;
+    min-width: 76px;
+    height: 38px;
+    flex: 0 0 76px;
     justify-content: space-between;
+    gap: 0;
+    padding-inline: 10px 8px;
   }
 
   .tool-label {
-    font-size: 0.62rem;
+    display: none;
   }
 
   .theme-toggle {
-    min-width: 104px;
-    height: 44px;
-    font-size: 0.82rem;
-    flex: 1 1 104px;
+    min-width: 74px;
+    height: 38px;
+    padding-inline: 10px;
+    font-size: 0.78rem;
+    flex: 0 0 auto;
   }
 
   .lang-select {
     min-width: 0;
     height: 100%;
-    font-size: 0.82rem;
+    width: 54px;
+    font-size: 0.78rem;
+    padding-inline: 4px 14px;
   }
 
   .header-cta {
     min-width: 0;
     width: auto;
-    min-height: 44px;
-    padding-inline: 14px;
-    font-size: 0.82rem;
+    min-height: 38px;
+    padding-inline: 12px;
+    border-radius: 12px;
+    font-size: 0.78rem;
     white-space: nowrap;
-    flex: 1 1 132px;
+    flex: 1 1 auto;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .hero.section {
+    padding-block: 42px 38px;
+  }
+
+  .hero-grid {
+    gap: 22px;
   }
 
   .hero::before {
@@ -1483,18 +1565,22 @@ ul {
 
   .hero-panel {
     max-width: none;
+    padding: 18px;
+    border-radius: 10px;
+    text-align: start;
   }
 
   .idea-slideshow {
-    min-height: 280px;
+    min-height: 240px;
   }
 
   .hero-content h1 {
-    font-size: clamp(1.5rem, 7vw, 2rem);
+    font-size: clamp(1.45rem, 6.4vw, 1.95rem);
   }
 
   .hero-text {
-    font-size: 0.95rem;
+    font-size: 0.94rem;
+    line-height: 1.65;
   }
 
   .sponsor-item {
@@ -1502,9 +1588,25 @@ ul {
     height: 108px;
   }
 
+  .sponsor-marquee {
+    --sponsor-gap: 12px;
+    --sponsor-height: 132px;
+    --sponsor-duration: 28s;
+  }
+
+  .sponsor-marquee::before,
+  .sponsor-marquee::after {
+    width: 28px;
+  }
+
   .profile-card {
     border-radius: 12px;
-    padding: 18px;
+    padding: 18px 16px;
+  }
+
+  .profile-card li {
+    justify-content: flex-start;
+    text-align: start;
   }
 
   .hero-actions .btn {
@@ -1526,14 +1628,15 @@ ul {
   .team-card,
   .contact-card,
   .form-card {
-    padding: 20px;
+    padding: 18px 16px;
   }
 }
 
 @media (min-width: 980px) {
   .header-inner {
-    grid-template-columns: auto 1fr auto;
-    gap: 16px;
+    grid-template-columns: minmax(320px, 360px) minmax(0, 1fr) auto;
+    gap: 18px;
+    align-items: stretch;
   }
 
   .nav-toggle {
@@ -1544,6 +1647,7 @@ ul {
     justify-self: stretch;
     display: flex;
     justify-content: center;
+    min-width: 0;
   }
 
   .nav-list {
@@ -1560,6 +1664,11 @@ ul {
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
     justify-content: center;
     backdrop-filter: none;
+  }
+
+  .header-tools {
+    justify-self: end;
+    flex-shrink: 0;
   }
 
   .hero-grid {
@@ -1592,6 +1701,33 @@ ul {
   .team-grid {
     grid-template-columns: minmax(0, 860px);
     justify-content: center;
+  }
+}
+
+@media (min-width: 980px) and (max-width: 1380px) {
+  .header-inner {
+    grid-template-columns: minmax(320px, 1fr) auto;
+    grid-template-areas:
+      "brand tools"
+      "nav nav";
+    row-gap: 14px;
+  }
+
+  .brand-block {
+    grid-area: brand;
+    grid-column: auto;
+  }
+
+  .main-nav {
+    grid-area: nav;
+  }
+
+  .header-tools {
+    grid-area: tools;
+  }
+
+  .nav-list {
+    width: 100%;
   }
 }
 
@@ -1677,6 +1813,14 @@ html[data-theme="dark"] .sponsors,
 html[data-theme="dark"] .profile-section,
 html[data-theme="dark"] .profile-soft {
   background: #131d2e;
+}
+
+html[data-theme="dark"] .sponsor-marquee::before {
+  background: linear-gradient(90deg, #1a263a 0%, rgba(26, 38, 58, 0) 100%);
+}
+
+html[data-theme="dark"] .sponsor-marquee::after {
+  background: linear-gradient(270deg, #1a263a 0%, rgba(26, 38, 58, 0) 100%);
 }
 
 html[data-theme="dark"] .field input,

@@ -485,7 +485,14 @@ const translations = {
     stat_countries: 'الدول المغطاة',
     stat_tunisia: 'مراجع تونس',
     stat_collab: 'مشاريع بالشراكة',
-    back_main: 'العودة إلى الموقع الرئيسي'
+    back_main: 'العودة إلى الموقع الرئيسي',
+    footer_tagline: 'مكتب دراسات متعدد الاختصاصات',
+    footer_services: 'مجالات معتمدة',
+    footer_contact: 'التواصل',
+    service_1_title: 'الهندسة الكهربائية',
+    service_2_title: 'أنظمة السلامة من الحرائق',
+    service_3_title: 'التدقيق والتصرف في الطاقة',
+    service_4_title: 'الهندسة الفوطاضوئية'
   },
   fr: {
     page_title: "MK ENGINEERING | Nos projets",
@@ -525,7 +532,14 @@ const translations = {
     stat_countries: "Pays couverts",
     stat_tunisia: "Références en Tunisie",
     stat_collab: "Projets en collaboration",
-    back_main: "Retour au site principal"
+    back_main: "Retour au site principal",
+    footer_tagline: "Bureau d'études pluridisciplinaire",
+    footer_services: "Domaines agréés",
+    footer_contact: "Contact",
+    service_1_title: "Ingénierie électrique",
+    service_2_title: "Systèmes de sécurité incendie",
+    service_3_title: "Audit et management de l'énergie",
+    service_4_title: "Ingénierie photovoltaïque"
   },
   en: {
     page_title: 'MK ENGINEERING | Our Projects',
@@ -565,7 +579,14 @@ const translations = {
     stat_countries: 'Countries covered',
     stat_tunisia: 'Tunisia references',
     stat_collab: 'Collaboration projects',
-    back_main: 'Back to main website'
+    back_main: 'Back to main website',
+    footer_tagline: 'Multidisciplinary Design Office',
+    footer_services: 'Accredited Scope',
+    footer_contact: 'Contact',
+    service_1_title: 'Electrical Engineering',
+    service_2_title: 'Fire Safety Systems',
+    service_3_title: 'Energy Audit and Management',
+    service_4_title: 'Photovoltaic Engineering'
   }
 };
 

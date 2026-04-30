@@ -7,6 +7,7 @@ const mainNav = document.querySelector('.main-nav');
 const langSelect = document.querySelector('#language-select');
 const pageLoader = document.querySelector('.page-loader');
 const themeToggle = document.querySelector('#theme-toggle');
+const siteVisitStorageKey = 'mk_site_seen';
 
 const translations = {
   ar: {
@@ -387,11 +388,41 @@ const applyTheme = (theme, persist = true) => {
   if (persist) localStorage.setItem('mk_theme', currentTheme);
 };
 
+const getNavigationType = () => {
+  const [navigationEntry] = performance.getEntriesByType?.('navigation') || [];
+  return navigationEntry?.type || 'navigate';
+};
+
+const hasSeenSiteThisSession = () => {
+  try {
+    return sessionStorage.getItem(siteVisitStorageKey) === '1';
+  } catch {
+    return false;
+  }
+};
+
+const markSiteSeenThisSession = () => {
+  try {
+    sessionStorage.setItem(siteVisitStorageKey, '1');
+  } catch {
+    // Browsers can block sessionStorage in strict privacy modes.
+  }
+};
+
 if (pageLoader) {
-  window.setTimeout(() => {
+  const navigationType = getNavigationType();
+  const shouldShowLoader = navigationType === 'reload' || !hasSeenSiteThisSession();
+  markSiteSeenThisSession();
+
+  if (shouldShowLoader) {
+    window.setTimeout(() => {
+      pageLoader.classList.add('is-hidden');
+      document.body.classList.remove('is-loading');
+    }, 3000);
+  } else {
     pageLoader.classList.add('is-hidden');
     document.body.classList.remove('is-loading');
-  }, 3000);
+  }
 }
 
 const updateHeaderState = () => {
