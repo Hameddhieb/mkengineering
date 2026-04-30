@@ -106,42 +106,14 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <div id="stats-grid" class="stats-grid" aria-label="Project statistics" data-i18n-aria-label="stats_aria"></div>
-      </div>
-    </section>
-
     <section class="section section-muted">
       <div class="container">
-        <div class="controls-wrap reveal">
-          <div class="control-field">
-            <label for="country-filter" data-i18n="label_country">Country</label>
-            <select id="country-filter">
-              <option value="all" data-i18n="all_countries">All countries</option>
-            </select>
-          </div>
-          <div class="control-field control-grow">
-            <label for="search-input" data-i18n="label_search">Search</label>
-            <input id="search-input" type="search" placeholder="Search by owner, location, collaboration or project scope" data-i18n-placeholder="search_placeholder" />
-          </div>
+        <div class="gallery-heading reveal">
+          <p class="eyebrow gallery-eyebrow" data-i18n="gallery_eyebrow">PROJECT GALLERY</p>
+          <h2 data-i18n="gallery_title">Selected Project Images</h2>
+          <p data-i18n="gallery_text">Hover any image to reveal the project name with a refined visual overlay.</p>
         </div>
-
-        <div class="table-shell reveal">
-          <table class="projects-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th data-i18n="th_owner">Owner / Client</th>
-                <th data-i18n="th_country">Country</th>
-                <th data-i18n="th_project">Project</th>
-                <th data-i18n="th_note">Reference Note</th>
-              </tr>
-            </thead>
-            <tbody id="projects-tbody"></tbody>
-          </table>
-        </div>
-        <p class="results-line reveal"><span data-i18n="results_prefix">Showing</span> <strong id="results-count">0</strong> <span data-i18n="results_suffix">references</span></p>
+        <div id="projects-gallery" class="projects-gallery" aria-label="Project image gallery" data-i18n-aria-label="gallery_aria"></div>
       </div>
     </section>
   </main>

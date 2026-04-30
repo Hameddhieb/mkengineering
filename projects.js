@@ -438,6 +438,7 @@ const countryFilter = document.querySelector('#country-filter');
 const searchInput = document.querySelector('#search-input');
 const resultsCount = document.querySelector('#results-count');
 const statsGrid = document.querySelector('#stats-grid');
+const projectsGallery = document.querySelector('#projects-gallery');
 const languageSelect = document.querySelector('#projects-language');
 const metaDescription = document.querySelector('meta[name="description"]');
 const themeToggle = document.querySelector('#theme-toggle-projects');
@@ -445,6 +446,24 @@ const navToggle = document.querySelector('.nav-toggle');
 const navList = document.querySelector('.nav-list');
 const navOverlay = document.querySelector('#nav-overlay');
 const mainNav = document.querySelector('.main-nav');
+
+const projectImages = [
+  'CAMPUS IIT-ISB-NORTH AMERICAN PRIVAT UNIVERSITY & NORTH AMERICAN.jpg',
+  "CONSTRUCTION D'UN IMMEUBLE-SOUS SOL+RDC+5 ETAGES- Wilaya  de BATNA - ALGERIE-GROUPE AMENI.JPG",
+  'Construction du siège CE-C3I - Ministère de la Défense-République islamique de Mauritanie.jpg',
+  'HORSE RACING AND VETERINARY COMPLEX-LIBYE-BENGHAZI-SIDI MANSOUR.png',
+  'HOTEL BEJAOUI ALGER.jpg',
+  'MALL POLYCLINIQUE.jpg',
+  "PROJET DE CONSTRUCTION D'UNE PISCINE COUVERTE-a Route de Menzel Chaker Km 5 - Sfax.jpg",
+  "PROJET DE REAMENAGEMENT D'UN CENTRE COMMERCIAL EN R+2 et un ensemble des Appartements en 3, 4 et 5éme Etage A SO.jpg",
+  "PROJET DE RÉAMENAGEMENT DE SALLE D' HEMODIALISE  À L'HOPITAL-RÉGIONAL DE JBENIENA.jpg",
+  "SALON DE THE-Complexe MAHSOUNA - Rte de l'Afrane - Sfax.jpg",
+  'USINE SAFI DE JUS ET LAIT-LIBYE-ZLITEN-WHIBA HOLDING.jpg',
+  'villa ben ayed.jpeg',
+  'VILLA-HAKIM ROUTE TBOLBI KM 4- SFAX.jpg',
+  'VILLA-MAALEJ.jpg',
+  'VILLA-SOUKRA.jpg'
+];
 
 const translations = {
   ar: {
@@ -470,6 +489,11 @@ const translations = {
     hero_title: 'مشاريعنا',
     hero_text: 'محفظة تفصيلية لمراجع MK Engineering عبر تونس وليبيا والجزائر وموريتانيا وعمان وساحل العاج وبوركينا فاسو والإمارات.',
     stats_aria: 'إحصاءات المشاريع',
+    gallery_aria: 'معرض صور المشاريع',
+    gallery_eyebrow: 'معرض المشاريع',
+    gallery_title: 'صور مختارة للمشاريع',
+    gallery_text: 'مرر مؤشر الفأرة فوق أي صورة لإظهار اسم المشروع بحركة بصرية أنيقة.',
+    gallery_image_alt: 'صورة مشروع',
     label_country: 'الدولة',
     all_countries: 'كل الدول',
     label_search: 'البحث',
@@ -517,6 +541,11 @@ const translations = {
     hero_title: "Nos projets",
     hero_text: "Portefeuille détaillé des références de MK Engineering en Tunisie, Libye, Algérie, Mauritanie, Oman, Côte d'Ivoire, Burkina Faso et Émirats arabes unis.",
     stats_aria: "Statistiques des projets",
+    gallery_aria: 'Galerie photos des projets',
+    gallery_eyebrow: 'GALERIE PROJETS',
+    gallery_title: 'Images sélectionnées des projets',
+    gallery_text: "Survolez une image pour afficher le nom du projet avec une animation soignée.",
+    gallery_image_alt: 'Image du projet',
     label_country: "Pays",
     all_countries: "Tous les pays",
     label_search: "Recherche",
@@ -564,6 +593,11 @@ const translations = {
     hero_title: 'Our Projects',
     hero_text: 'Detailed portfolio of MK Engineering references across Tunisia, Libya, Algeria, Mauritania, Oman, Ivory Coast, Burkina Faso, and UAE.',
     stats_aria: 'Project statistics',
+    gallery_aria: 'Project image gallery',
+    gallery_eyebrow: 'PROJECT GALLERY',
+    gallery_title: 'Selected Project Images',
+    gallery_text: 'Hover any image to reveal the project name with a refined visual overlay.',
+    gallery_image_alt: 'Project image',
     label_country: 'Country',
     all_countries: 'All countries',
     label_search: 'Search',
@@ -609,6 +643,23 @@ const t = (key) => translations[currentLang][key] || translations.en[key] || key
 const countryLabel = (country) => countryNames[country]?.[currentLang] || country;
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let revealObserver;
+
+const escapeHtml = (value) =>
+  value.replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[char]);
+
+const formatProjectImageName = (filename) =>
+  filename
+    .replace(/\.[^.]+$/, '')
+    .replace(/[_]+/g, ' ')
+    .replace(/\s*-\s*/g, ' - ')
+    .replace(/\s+/g, ' ')
+    .trim();
 
 const collectRevealItems = (scope = document) => {
   const items = [];
@@ -674,6 +725,7 @@ const countByCountry = () => {
 };
 
 const renderStats = () => {
+  if (!statsGrid) return;
   const countries = countByCountry();
   const collaborations = projects.filter((p) => p.note.toLowerCase().includes('collaboration')).length;
 
@@ -699,6 +751,7 @@ const renderStats = () => {
 };
 
 const buildCountryFilter = () => {
+  if (!countryFilter) return;
   const countries = [...new Set(projects.map((p) => p.country))].sort((a, b) => a.localeCompare(b));
   countries.forEach((country) => {
     const option = document.createElement('option');
@@ -709,6 +762,7 @@ const buildCountryFilter = () => {
 };
 
 const updateCountryFilterLabels = () => {
+  if (!countryFilter) return;
   const firstOption = countryFilter.querySelector('option[value="all"]');
   if (firstOption) firstOption.textContent = t('all_countries');
 
@@ -719,6 +773,7 @@ const updateCountryFilterLabels = () => {
 };
 
 const filterProjects = () => {
+  if (!countryFilter || !searchInput) return projects;
   const country = countryFilter.value;
   const query = searchInput.value.trim().toLowerCase();
 
@@ -731,6 +786,7 @@ const filterProjects = () => {
 };
 
 const renderTable = () => {
+  if (!tbody || !resultsCount) return;
   const rows = filterProjects();
   resultsCount.textContent = String(rows.length);
   const labels = {
@@ -766,6 +822,30 @@ const renderTable = () => {
     .join('');
 
   setupRevealAnimations(tbody);
+};
+
+const renderProjectGallery = () => {
+  if (!projectsGallery) return;
+
+  projectsGallery.innerHTML = projectImages
+    .map((filename, index) => {
+      const title = formatProjectImageName(filename);
+      const safeTitle = escapeHtml(title);
+      const safeSrc = `projects/${encodeURIComponent(filename).replace(/%2F/g, '/')}`;
+
+      return `
+        <figure class="project-gallery-card reveal" tabindex="0" data-reveal-delay="${Math.min(index * 35, 260)}">
+          <img src="${safeSrc}" alt="${escapeHtml(`${t('gallery_image_alt')} - ${title}`)}" loading="lazy" decoding="async" />
+          <figcaption>
+            <span class="project-gallery-index">${String(index + 1).padStart(2, '0')}</span>
+            <span class="project-gallery-title">${safeTitle}</span>
+          </figcaption>
+        </figure>
+      `;
+    })
+    .join('');
+
+  setupRevealAnimations(projectsGallery);
 };
 
 const applyLanguage = (lang) => {
@@ -809,12 +889,13 @@ const applyLanguage = (lang) => {
   updateCountryFilterLabels();
   renderStats();
   renderTable();
+  renderProjectGallery();
   localStorage.setItem('mk_lang', lang);
   localStorage.setItem('mk_projects_lang', lang);
 };
 
-countryFilter.addEventListener('change', renderTable);
-searchInput.addEventListener('input', renderTable);
+if (countryFilter) countryFilter.addEventListener('change', renderTable);
+if (searchInput) searchInput.addEventListener('input', renderTable);
 if (languageSelect) {
   languageSelect.addEventListener('change', () => applyLanguage(languageSelect.value));
 }
