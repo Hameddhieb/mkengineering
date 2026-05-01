@@ -586,19 +586,14 @@ const ideaDots = document.querySelector('#idea-dots');
 if (ideaSlideshow) {
   const ideaImages = [
     'WhatsApp Image 2026-02-26 at 00.08.12 (1).jpeg',
-    'WhatsApp Image 2026-02-26 at 00.08.12 (2).jpeg',
     'WhatsApp Image 2026-02-26 at 00.08.12 (3).jpeg',
-    'WhatsApp Image 2026-02-26 at 00.08.12.jpeg',
     'WhatsApp Image 2026-02-26 at 00.08.26 (1).jpeg',
     'WhatsApp Image 2026-02-26 at 00.08.26.jpeg',
     'WhatsApp Image 2026-02-26 at 00.08.27 (1).jpeg',
-    'WhatsApp Image 2026-02-26 at 00.08.27 (2) - Copy.jpeg',
     'WhatsApp Image 2026-02-26 at 00.08.27 (3) - Copy.jpeg',
     'WhatsApp Image 2026-02-26 at 00.08.27 (4).jpeg',
     'WhatsApp Image 2026-02-26 at 00.08.27 (5).jpeg',
-    'WhatsApp Image 2026-02-26 at 00.08.27 - Copy.jpeg',
-    'WhatsApp Image 2026-02-26 at 00.08.27.jpeg',
-    'work.png'
+    'WhatsApp Image 2026-02-26 at 00.08.27.jpeg'
   ];
 
   ideaImages.forEach((fileName, index) => {

@@ -485,17 +485,6 @@ ul {
   color: #f5f8ff;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to left, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 52px 52px;
-  pointer-events: none;
-}
-
 .hero .container {
   position: relative;
   z-index: 1;
@@ -1148,11 +1137,6 @@ input[type="search"]:focus {
 
   .hero.section {
     padding-block: 42px 38px;
-  }
-
-  .hero::before {
-    opacity: 0.55;
-    background-size: 72px 72px;
   }
 
   .hero-text {
