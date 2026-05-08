@@ -452,8 +452,6 @@ const projectImages = [
   "CONSTRUCTION D'UN IMMEUBLE-SOUS SOL+RDC+5 ETAGES- Wilaya  de BATNA - ALGERIE-GROUPE AMENI.JPG",
   'Construction du siège CE-C3I - Ministère de la Défense-République islamique de Mauritanie.jpg',
   'HORSE RACING AND VETERINARY COMPLEX-LIBYE-BENGHAZI-SIDI MANSOUR.png',
-  'HOTEL BEJAOUI ALGER.jpg',
-  'MALL POLYCLINIQUE.jpg',
   "PROJET DE CONSTRUCTION D'UNE PISCINE COUVERTE-a Route de Menzel Chaker Km 5 - Sfax.jpg",
   "PROJET DE REAMENAGEMENT D'UN CENTRE COMMERCIAL EN R+2 et un ensemble des Appartements en 3, 4 et 5éme Etage A SO.jpg",
   "PROJET DE RÉAMENAGEMENT DE SALLE D' HEMODIALISE  À L'HOPITAL-RÉGIONAL DE JBENIENA.jpg",
